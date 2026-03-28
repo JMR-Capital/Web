@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="api-base" content="https://jmrcapital-func-bxbvbvhsgha3eubj.southafricanorth-01.azurewebsites.net/api">
     <title>JMR Capital · Sign in</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -465,7 +466,6 @@
             color: #1E1E1E;
         }
 
-        /* ---------- MOBILE RESPONSIVE FIXES ---------- */
         @media (max-width: 768px) {
             body {
                 padding: 8px;
@@ -486,7 +486,7 @@
 
             .brand-panel::before,
             .brand-panel::after {
-                content: none; /* remove decorative circles on mobile for cleaner look */
+                content: none;
             }
 
             .brand-logo {
@@ -575,7 +575,7 @@
 
             .form-input {
                 padding: 14px 16px;
-                font-size: 16px; /* prevents zoom on iOS */
+                font-size: 16px;
             }
 
             .options-row {
@@ -617,7 +617,6 @@
             }
         }
 
-        /* small phones */
         @media (max-width: 480px) {
             .brand-title {
                 font-size: 32px;
@@ -691,48 +690,29 @@
                     <h2 class="auth-title">Welcome back</h2>
                     <p class="auth-subtitle">Sign in to your account</p>
                     
-                    <form action="dashboard.html">
+                    <form id="loginForm">
                         <div class="form-group">
                             <label class="form-label">Email address</label>
-                            <input type="email" class="form-input" placeholder="john.doe@example.com" value="john.doe@example.com">
+                            <input type="email" id="loginEmail" class="form-input" placeholder="john.doe@example.com" required>
                         </div>
-                        
                         <div class="form-group">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-input" placeholder="Enter your password" value="password123">
+                            <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
                         </div>
-                        
                         <div class="options-row">
                             <label class="checkbox">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" id="rememberMe" checked>
                                 <span>Remember me</span>
                             </label>
-                            <button class="forgot-link">Forgot password?</button>
+                            <button type="button" class="forgot-link">Forgot password?</button>
                         </div>
-                        
                         <button type="submit" class="auth-btn primary">Sign in</button>
-                        
-                        <div class="divider">
-                            <span class="divider-line"></span>
-                            <span>or continue with</span>
-                            <span class="divider-line"></span>
-                        </div>
-                        
+                        <div class="divider"><span class="divider-line"></span><span>or continue with</span><span class="divider-line"></span></div>
                         <div class="social-buttons">
-                            <button class="social-btn apple">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z" fill="currentColor"/></svg>
-                                Apple
-                            </button>
-                            <button class="social-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H18.02C17.74 15.53 17.02 16.63 15.97 17.36V20.09H19.38C21.32 18.31 22.56 15.6 22.56 12.25Z" fill="#4285F4"/><path d="M12 23C14.83 23 17.21 22.02 19.38 20.09L15.97 17.36C14.8 18.12 13.45 18.57 12 18.57C9.27 18.57 6.97 16.77 6.16 14.31H2.64V17.13C4.8 21.38 9.14 23 12 23Z" fill="#34A853"/><path d="M6.16 14.31C5.95 13.69 5.84 13.03 5.84 12.35C5.84 11.67 5.95 11.01 6.16 10.39V7.57H2.64C1.94 8.95 1.5 10.5 1.5 12.18C1.5 13.86 1.94 15.41 2.64 16.79L6.16 14.31Z" fill="#FBBC05"/><path d="M12 6.43C13.58 6.43 14.99 7.01 16.1 8.07L19.46 4.71C17.2 2.6 14.22 1.5 12 1.5C8.14 1.5 4.8 4.12 2.64 7.57L6.16 10.39C6.97 7.93 9.27 6.43 12 6.43Z" fill="#EA4335"/></svg>
-                                Google
-                            </button>
+                            <button type="button" class="social-btn apple">Apple</button>
+                            <button type="button" class="social-btn">Google</button>
                         </div>
-                        
-                        <div class="auth-footer">
-                            Don't have an account?
-                            <label for="register-view">Create one</label>
-                        </div>
+                        <div class="auth-footer">Don't have an account? <label for="register-view">Create one</label></div>
                     </form>
                 </div>
                 
@@ -741,73 +721,124 @@
                     <h2 class="auth-title">Create account</h2>
                     <p class="auth-subtitle">Get started with JMR Capital</p>
                     
-                    <form action="dashboard.html">
+                    <form id="registerForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">First name</label>
-                                <input type="text" class="form-input" placeholder="John">
+                                <input type="text" id="firstName" class="form-input" placeholder="John" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Last name</label>
-                                <input type="text" class="form-input" placeholder="Doe">
+                                <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label class="form-label">Email address</label>
-                            <input type="email" class="form-input" placeholder="john.doe@example.com">
+                            <input type="email" id="regEmail" class="form-input" placeholder="john.doe@example.com" required>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">ID Number</label>
-                            <input type="text" class="form-input" placeholder="800101 5009 087">
-                        </div>
-                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-input" placeholder="Create password">
+                                <input type="password" id="regPassword" class="form-input" placeholder="Create password" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Confirm</label>
-                                <input type="password" class="form-input" placeholder="Confirm password">
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm password" required>
                             </div>
                         </div>
-                        
                         <div class="options-row">
                             <label class="checkbox">
-                                <input type="checkbox">
+                                <input type="checkbox" id="termsCheckbox" required>
                                 <span>I accept the <a href="#" style="color: #1E1E1E; font-weight: 600; text-decoration: underline;">terms</a></span>
                             </label>
                         </div>
-                        
                         <button type="submit" class="auth-btn primary">Create account</button>
-                        
-                        <div class="divider">
-                            <span class="divider-line"></span>
-                            <span>or continue with</span>
-                            <span class="divider-line"></span>
-                        </div>
-                        
+                        <div class="divider"><span class="divider-line"></span><span>or continue with</span><span class="divider-line"></span></div>
                         <div class="social-buttons">
-                            <button class="social-btn apple">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z" fill="currentColor"/></svg>
-                                Apple
-                            </button>
-                            <button class="social-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H18.02C17.74 15.53 17.02 16.63 15.97 17.36V20.09H19.38C21.32 18.31 22.56 15.6 22.56 12.25Z" fill="#4285F4"/><path d="M12 23C14.83 23 17.21 22.02 19.38 20.09L15.97 17.36C14.8 18.12 13.45 18.57 12 18.57C9.27 18.57 6.97 16.77 6.16 14.31H2.64V17.13C4.8 21.38 9.14 23 12 23Z" fill="#34A853"/><path d="M6.16 14.31C5.95 13.69 5.84 13.03 5.84 12.35C5.84 11.67 5.95 11.01 6.16 10.39V7.57H2.64C1.94 8.95 1.5 10.5 1.5 12.18C1.5 13.86 1.94 15.41 2.64 16.79L6.16 14.31Z" fill="#FBBC05"/><path d="M12 6.43C13.58 6.43 14.99 7.01 16.1 8.07L19.46 4.71C17.2 2.6 14.22 1.5 12 1.5C8.14 1.5 4.8 4.12 2.64 7.57L6.16 10.39C6.97 7.93 9.27 6.43 12 6.43Z" fill="#EA4335"/></svg>
-                                Google
-                            </button>
+                            <button type="button" class="social-btn apple">Apple</button>
+                            <button type="button" class="social-btn">Google</button>
                         </div>
-                        
-                        <div class="auth-footer">
-                            Already have an account?
-                            <label for="login-view">Sign in</label>
-                        </div>
+                        <div class="auth-footer">Already have an account? <label for="login-view">Sign in</label></div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const API_BASE = document.querySelector('meta[name="api-base"]').getAttribute('content');
+
+        // Register
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+
+            if (password !== confirm) {
+                alert('Passwords do not match');
+                return;
+            }
+            if (!document.getElementById('termsCheckbox').checked) {
+                alert('You must accept the terms');
+                return;
+            }
+
+            const payload = { firstName, lastName, email, password, confirmPassword: confirm };
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    credentials: 'include'
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    alert(data.error || data.errors?.join(', ') || 'Registration failed');
+                    return;
+                }
+                localStorage.setItem('token', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                window.location.href = 'dashboard.html';
+            } catch (err) {
+                console.error(err);
+                alert('Network error. Please try again.');
+            }
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            const payload = { email, password };
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    credentials: 'include'
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    alert(data.error || 'Login failed');
+                    return;
+                }
+                localStorage.setItem('token', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                window.location.href = 'dashboard.html';
+            } catch (err) {
+                console.error(err);
+                alert('Network error. Please try again.');
+            }
+        });
+    </script>
 </body>
 </html>
