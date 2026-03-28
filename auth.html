@@ -7,14 +7,9 @@
     <title>JMR Capital · Sign in</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* ===== ORIGINAL CSS – KEEP AS IS ===== */
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #F8F8FA;
@@ -24,7 +19,6 @@
             justify-content: center;
             padding: 12px;
         }
-        
         .auth-container {
             display: flex;
             width: 100%;
@@ -36,7 +30,6 @@
             overflow: hidden;
             margin: 0;
         }
-        
         .brand-panel {
             flex: 1;
             background: #1E1E1E;
@@ -46,7 +39,6 @@
             position: relative;
             overflow: hidden;
         }
-        
         .brand-panel::before {
             content: '';
             position: absolute;
@@ -57,7 +49,6 @@
             background: rgba(255,255,255,0.03);
             border-radius: 50%;
         }
-        
         .brand-panel::after {
             content: '';
             position: absolute;
@@ -68,7 +59,6 @@
             background: rgba(255,255,255,0.03);
             border-radius: 50%;
         }
-        
         .brand-logo {
             display: flex;
             align-items: center;
@@ -77,7 +67,6 @@
             position: relative;
             z-index: 1;
         }
-        
         .logo-mark {
             width: 48px;
             height: 48px;
@@ -87,19 +76,16 @@
             align-items: center;
             justify-content: center;
         }
-        
         .logo-mark span {
             color: #1E1E1E;
             font-size: 24px;
             font-weight: 600;
         }
-        
         .logo-text {
             color: #FFFFFF;
             font-size: 24px;
             font-weight: 600;
         }
-        
         .brand-content {
             flex: 1;
             display: flex;
@@ -108,7 +94,6 @@
             position: relative;
             z-index: 1;
         }
-        
         .brand-title {
             color: #FFFFFF;
             font-size: 48px;
@@ -117,7 +102,6 @@
             line-height: 1.2;
             margin-bottom: 24px;
         }
-        
         .brand-subtitle {
             color: rgba(255,255,255,0.6);
             font-size: 18px;
@@ -125,20 +109,17 @@
             max-width: 400px;
             margin-bottom: 48px;
         }
-        
         .brand-features {
             display: flex;
             flex-direction: column;
             gap: 24px;
         }
-        
         .feature-item {
             display: flex;
             align-items: center;
             gap: 16px;
             color: #FFFFFF;
         }
-        
         .feature-icon {
             width: 48px;
             height: 48px;
@@ -148,7 +129,6 @@
             align-items: center;
             justify-content: center;
         }
-        
         .feature-icon svg {
             width: 24px;
             height: 24px;
@@ -156,18 +136,15 @@
             stroke-width: 1.8;
             fill: none;
         }
-        
         .feature-text h4 {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 4px;
         }
-        
         .feature-text p {
             font-size: 14px;
             color: rgba(255,255,255,0.6);
         }
-        
         .brand-footer {
             position: relative;
             z-index: 1;
@@ -175,7 +152,6 @@
             font-size: 14px;
             margin-top: 60px;
         }
-        
         .auth-panel {
             flex: 1;
             padding: 60px 80px;
@@ -183,13 +159,11 @@
             flex-direction: column;
             background: #FFFFFF;
         }
-        
         .auth-header {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 60px;
         }
-        
         .auth-toggle {
             display: flex;
             gap: 8px;
@@ -198,7 +172,6 @@
             border-radius: 40px;
             border: 1px solid #F0F0F3;
         }
-        
         .toggle-btn {
             padding: 12px 28px;
             border-radius: 40px;
@@ -212,13 +185,11 @@
             display: inline-block;
             text-align: center;
         }
-        
         .toggle-btn.active {
             background: #FFFFFF;
             color: #1E1E1E;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
-        
         .auth-content {
             flex: 1;
             display: flex;
@@ -228,7 +199,6 @@
             margin: 0 auto;
             width: 100%;
         }
-        
         .auth-title {
             font-size: 32px;
             font-weight: 600;
@@ -236,17 +206,14 @@
             letter-spacing: -0.5px;
             margin-bottom: 8px;
         }
-        
         .auth-subtitle {
             font-size: 16px;
             color: #8E8E93;
             margin-bottom: 40px;
         }
-        
         .form-group {
             margin-bottom: 24px;
         }
-        
         .form-label {
             display: block;
             font-size: 13px;
@@ -256,7 +223,6 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-        
         .form-input {
             width: 100%;
             background: #F8F8FA;
@@ -269,37 +235,31 @@
             transition: all 0.2s ease;
             -webkit-appearance: none;
         }
-        
         .form-input:focus {
             border-color: #1E1E1E;
             background: #FFFFFF;
         }
-        
         .form-row {
             display: flex;
             gap: 16px;
             margin-bottom: 24px;
         }
-        
         .form-row .form-group {
             flex: 1;
             margin-bottom: 0;
         }
-        
         .options-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 16px 0 32px 0;
         }
-        
         .checkbox {
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
         }
-        
         .checkbox input {
             width: 18px;
             height: 18px;
@@ -309,12 +269,10 @@
             cursor: pointer;
             position: relative;
         }
-        
         .checkbox input:checked {
             background: #1E1E1E;
             border-color: #1E1E1E;
         }
-        
         .checkbox input:checked::after {
             content: '';
             position: absolute;
@@ -326,12 +284,10 @@
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
         }
-        
         .checkbox span {
             font-size: 15px;
             color: #1E1E1E;
         }
-        
         .forgot-link {
             background: none;
             border: none;
@@ -340,11 +296,9 @@
             cursor: pointer;
             text-decoration: none;
         }
-        
         .forgot-link:hover {
             color: #1E1E1E;
         }
-        
         .auth-btn {
             width: 100%;
             padding: 18px 0;
@@ -356,16 +310,13 @@
             border: none;
             margin-bottom: 24px;
         }
-        
         .auth-btn.primary {
             background: #1E1E1E;
             color: #FFFFFF;
         }
-        
         .auth-btn.primary:hover {
             background: #2C2C2E;
         }
-        
         .divider {
             display: flex;
             align-items: center;
@@ -374,19 +325,16 @@
             color: #C6C6C8;
             font-size: 13px;
         }
-        
         .divider-line {
             flex: 1;
             height: 1px;
             background: #F0F0F3;
         }
-        
         .social-buttons {
             display: flex;
             gap: 16px;
             margin-bottom: 32px;
         }
-        
         .social-btn {
             flex: 1;
             padding: 16px 0;
@@ -403,27 +351,22 @@
             background: #FFFFFF;
             color: #1E1E1E;
         }
-        
         .social-btn:hover {
             background: #F8F8FA;
         }
-        
         .social-btn.apple {
             background: #000000;
             color: #FFFFFF;
             border: none;
         }
-        
         .social-btn.apple:hover {
             background: #1C1C1E;
         }
-        
         .auth-footer {
             text-align: center;
             color: #8E8E93;
             font-size: 14px;
         }
-        
         .auth-footer button,
         .auth-footer label {
             background: none;
@@ -435,213 +378,70 @@
             text-decoration: underline;
             display: inline;
         }
-        
         .view-toggle {
             display: none;
         }
-        
         #login-view:checked ~ .auth-container .login-view {
             display: block;
         }
-        
         #login-view:checked ~ .auth-container .register-view {
             display: none;
         }
-        
         #register-view:checked ~ .auth-container .login-view {
             display: none;
         }
-        
         #register-view:checked ~ .auth-container .register-view {
             display: block;
         }
-        
         #login-view:checked ~ .auth-container .toggle-login {
             background: #FFFFFF;
             color: #1E1E1E;
         }
-        
         #register-view:checked ~ .auth-container .toggle-register {
             background: #FFFFFF;
             color: #1E1E1E;
         }
-
+        /* responsive styles – keep yours */
         @media (max-width: 768px) {
-            body {
-                padding: 8px;
-                align-items: flex-start;
-            }
-
-            .auth-container {
-                flex-direction: column;
-                border-radius: 32px;
-                min-height: auto;
-                margin: 0;
-            }
-
-            .brand-panel {
-                padding: 32px 24px;
-                border-radius: 32px 32px 0 0;
-            }
-
-            .brand-panel::before,
-            .brand-panel::after {
-                content: none;
-            }
-
-            .brand-logo {
-                margin-bottom: 32px;
-            }
-
-            .brand-title {
-                font-size: 36px;
-                letter-spacing: -0.5px;
-            }
-
-            .brand-subtitle {
-                font-size: 16px;
-                margin-bottom: 32px;
-            }
-
-            .brand-features {
-                gap: 16px;
-            }
-
-            .feature-item {
-                gap: 12px;
-            }
-
-            .feature-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .feature-icon svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            .feature-text h4 {
-                font-size: 15px;
-            }
-
-            .feature-text p {
-                font-size: 13px;
-            }
-
-            .brand-footer {
-                margin-top: 32px;
-                font-size: 13px;
-            }
-
-            .auth-panel {
-                padding: 40px 24px;
-            }
-
-            .auth-header {
-                margin-bottom: 32px;
-                justify-content: center;
-            }
-
-            .auth-toggle {
-                width: 100%;
-                max-width: 320px;
-            }
-
-            .toggle-btn {
-                flex: 1;
-                padding: 12px 16px;
-                font-size: 14px;
-            }
-
-            .auth-title {
-                font-size: 28px;
-            }
-
-            .auth-subtitle {
-                font-size: 15px;
-                margin-bottom: 32px;
-            }
-
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-                margin-bottom: 0;
-            }
-
-            .form-row .form-group {
-                margin-bottom: 24px;
-            }
-
-            .form-input {
-                padding: 14px 16px;
-                font-size: 16px;
-            }
-
-            .options-row {
-                margin: 8px 0 24px 0;
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .checkbox span {
-                font-size: 14px;
-            }
-
-            .forgot-link {
-                font-size: 14px;
-            }
-
-            .auth-btn {
-                padding: 16px 0;
-                font-size: 16px;
-            }
-
-            .social-buttons {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .social-btn {
-                padding: 14px 0;
-                font-size: 14px;
-            }
-
-            .divider {
-                margin: 20px 0;
-                gap: 12px;
-            }
-
-            .auth-footer {
-                font-size: 14px;
-            }
+            body { padding: 8px; align-items: flex-start; }
+            .auth-container { flex-direction: column; border-radius: 32px; min-height: auto; margin: 0; }
+            .brand-panel { padding: 32px 24px; border-radius: 32px 32px 0 0; }
+            .brand-panel::before, .brand-panel::after { content: none; }
+            .brand-logo { margin-bottom: 32px; }
+            .brand-title { font-size: 36px; letter-spacing: -0.5px; }
+            .brand-subtitle { font-size: 16px; margin-bottom: 32px; }
+            .brand-features { gap: 16px; }
+            .feature-item { gap: 12px; }
+            .feature-icon { width: 40px; height: 40px; }
+            .feature-icon svg { width: 20px; height: 20px; }
+            .feature-text h4 { font-size: 15px; }
+            .feature-text p { font-size: 13px; }
+            .brand-footer { margin-top: 32px; font-size: 13px; }
+            .auth-panel { padding: 40px 24px; }
+            .auth-header { margin-bottom: 32px; justify-content: center; }
+            .auth-toggle { width: 100%; max-width: 320px; }
+            .toggle-btn { flex: 1; padding: 12px 16px; font-size: 14px; }
+            .auth-title { font-size: 28px; }
+            .auth-subtitle { font-size: 15px; margin-bottom: 32px; }
+            .form-row { flex-direction: column; gap: 0; margin-bottom: 0; }
+            .form-row .form-group { margin-bottom: 24px; }
+            .form-input { padding: 14px 16px; font-size: 16px; }
+            .options-row { margin: 8px 0 24px 0; flex-wrap: wrap; gap: 12px; }
+            .checkbox span { font-size: 14px; }
+            .forgot-link { font-size: 14px; }
+            .auth-btn { padding: 16px 0; font-size: 16px; }
+            .social-buttons { flex-direction: column; gap: 12px; }
+            .social-btn { padding: 14px 0; font-size: 14px; }
+            .divider { margin: 20px 0; gap: 12px; }
+            .auth-footer { font-size: 14px; }
         }
-
         @media (max-width: 480px) {
-            .brand-title {
-                font-size: 32px;
-            }
-
-            .brand-panel {
-                padding: 24px 20px;
-            }
-
-            .auth-panel {
-                padding: 32px 20px;
-            }
-
-            .auth-toggle {
-                max-width: 100%;
-            }
-
-            .toggle-btn {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-
-            .feature-item {
-                align-items: flex-start;
-            }
+            .brand-title { font-size: 32px; }
+            .brand-panel { padding: 24px 20px; }
+            .auth-panel { padding: 32px 20px; }
+            .auth-toggle { max-width: 100%; }
+            .toggle-btn { padding: 10px 12px; font-size: 13px; }
+            .feature-item { align-items: flex-start; }
         }
     </style>
 </head>
@@ -689,7 +489,6 @@
                 <div class="login-view">
                     <h2 class="auth-title">Welcome back</h2>
                     <p class="auth-subtitle">Sign in to your account</p>
-                    
                     <form id="loginForm">
                         <div class="form-group">
                             <label class="form-label">Email address</label>
@@ -720,7 +519,6 @@
                 <div class="register-view">
                     <h2 class="auth-title">Create account</h2>
                     <p class="auth-subtitle">Get started with JMR Capital</p>
-                    
                     <form id="registerForm">
                         <div class="form-row">
                             <div class="form-group">
@@ -766,79 +564,107 @@
     </div>
 
     <script>
-        const API_BASE = document.querySelector('meta[name="api-base"]').getAttribute('content');
-
-        // Register
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const confirm = document.getElementById('confirmPassword').value;
-
-            if (password !== confirm) {
-                alert('Passwords do not match');
+        (function() {
+            // Get API base from meta tag
+            const apiMeta = document.querySelector('meta[name="api-base"]');
+            if (!apiMeta) {
+                console.error('Meta tag "api-base" not found!');
+                alert('Configuration error: API base URL missing.');
                 return;
             }
-            if (!document.getElementById('termsCheckbox').checked) {
-                alert('You must accept the terms');
-                return;
+            const API_BASE = apiMeta.getAttribute('content');
+
+            // Helper: show error message
+            function showError(msg) {
+                alert(msg);
             }
 
-            const payload = { firstName, lastName, email, password, confirmPassword: confirm };
+            // Register handler
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const firstName = document.getElementById('firstName').value.trim();
+                    const lastName = document.getElementById('lastName').value.trim();
+                    const email = document.getElementById('regEmail').value.trim();
+                    const password = document.getElementById('regPassword').value;
+                    const confirm = document.getElementById('confirmPassword').value;
 
-            try {
-                const res = await fetch(`${API_BASE}/auth/register`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    credentials: 'include'
+                    if (password !== confirm) {
+                        showError('Passwords do not match');
+                        return;
+                    }
+                    if (!document.getElementById('termsCheckbox').checked) {
+                        showError('You must accept the terms');
+                        return;
+                    }
+
+                    const payload = { firstName, lastName, email, password, confirmPassword: confirm };
+
+                    try {
+                        const res = await fetch(`${API_BASE}/auth/register`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload),
+                            credentials: 'include'
+                        });
+
+                        const data = await res.json().catch(() => ({ error: 'Invalid response from server' }));
+                        if (!res.ok) {
+                            showError(data.error || data.errors?.join(', ') || 'Registration failed');
+                            return;
+                        }
+                        // Store tokens and user data
+                        localStorage.setItem('token', data.accessToken);
+                        localStorage.setItem('refreshToken', data.refreshToken);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        // Redirect to dashboard
+                        window.location.href = 'dashboard.html';
+                    } catch (err) {
+                        console.error(err);
+                        showError('Network error. Please try again.');
+                    }
                 });
-                const data = await res.json();
-                if (!res.ok) {
-                    alert(data.error || data.errors?.join(', ') || 'Registration failed');
-                    return;
-                }
-                localStorage.setItem('token', data.accessToken);
-                localStorage.setItem('refreshToken', data.refreshToken);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                window.location.href = 'dashboard.html';
-            } catch (err) {
-                console.error(err);
-                alert('Network error. Please try again.');
+            } else {
+                console.error('Register form not found');
             }
-        });
 
-        // Login
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
+            // Login handler
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail').value.trim();
+                    const password = document.getElementById('loginPassword').value;
 
-            const payload = { email, password };
+                    const payload = { email, password };
 
-            try {
-                const res = await fetch(`${API_BASE}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    credentials: 'include'
+                    try {
+                        const res = await fetch(`${API_BASE}/auth/login`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload),
+                            credentials: 'include'
+                        });
+
+                        const data = await res.json().catch(() => ({ error: 'Invalid response from server' }));
+                        if (!res.ok) {
+                            showError(data.error || 'Login failed');
+                            return;
+                        }
+                        localStorage.setItem('token', data.accessToken);
+                        localStorage.setItem('refreshToken', data.refreshToken);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        window.location.href = 'dashboard.html';
+                    } catch (err) {
+                        console.error(err);
+                        showError('Network error. Please try again.');
+                    }
                 });
-                const data = await res.json();
-                if (!res.ok) {
-                    alert(data.error || 'Login failed');
-                    return;
-                }
-                localStorage.setItem('token', data.accessToken);
-                localStorage.setItem('refreshToken', data.refreshToken);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                window.location.href = 'dashboard.html';
-            } catch (err) {
-                console.error(err);
-                alert('Network error. Please try again.');
+            } else {
+                console.error('Login form not found');
             }
-        });
+        })();
     </script>
 </body>
 </html>
