@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>JMR Capital · Loans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8F8FA;
+            min-height: 100vh;
+        }
+        
+        .web-container {
+            display: flex;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar - same as dashboard */
+        .sidebar {
+            width: 280px;
+            background: #FFFFFF;
+            border-right: 1px solid #F0F0F3;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: #1E1E1E;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-mark span {
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #8E8E93;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            fill: none;
+        }
+        
+        .nav-item:hover {
+            background: #F8F8FA;
+            color: #1E1E1E;
+        }
+        
+        .nav-item.active {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        .nav-item.active svg {
+            stroke: #FFFFFF;
+        }
+        
+        .user-section {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 1px solid #F0F0F3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            background: #F8F8FA;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .user-avatar span {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1E1E1E;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 2px;
+        }
+        
+        .user-email {
+            font-size: 13px;
+            color: #8E8E93;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 32px 40px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .header-left p {
+            font-size: 15px;
+            color: #8E8E93;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 280px;
+        }
+        
+        .search-box svg {
+            width: 20px;
+            height: 20px;
+            stroke: #8E8E93;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #1E1E1E;
+            width: 100%;
+        }
+        
+        .notification-btn {
+            width: 48px;
+            height: 48px;
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .notification-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: #1E1E1E;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 20px;
+            padding: 24px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #8E8E93;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .stat-trend {
+            font-size: 13px;
+            color: #34C759;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .stat-trend svg {
+            width: 16px;
+            height: 16px;
+            stroke: #34C759;
+        }
+        
+        /* Eligibility Card */
+        .eligibility-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .eligibility-content h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 8px;
+        }
+        
+        .eligibility-content p {
+            font-size: 14px;
+            color: #8E8E93;
+            margin-bottom: 16px;
+        }
+        
+        .eligibility-details {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            color: #8E8E93;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .detail-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .eligibility-badge {
+            padding: 8px 20px;
+            background: #E4F2E4;
+            color: #34C759;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #F0F0F3;
+            padding-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #8E8E93;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .tab:hover {
+            color: #1E1E1E;
+            background: #F8F8FA;
+        }
+        
+        .tab.active {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        /* Loans Grid */
+        .loans-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .loan-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            padding: 28px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .loan-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+        
+        .loan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .loan-id {
+            font-size: 14px;
+            font-weight: 500;
+            color: #8E8E93;
+        }
+        
+        .loan-status {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+        
+        .status-pending {
+            background: #FFF4E0;
+            color: #FF9F0A;
+        }
+        
+        .status-approved {
+            background: #E4F2E4;
+            color: #34C759;
+        }
+        
+        .status-disbursed {
+            background: #E0F0FF;
+            color: #007AFF;
+        }
+        
+        .status-repaid {
+            background: #F0F0F3;
+            color: #8E8E93;
+        }
+        
+        .loan-amount {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 16px;
+        }
+        
+        .loan-details {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F5F5F7;
+        }
+        
+        .loan-detail {
+            flex: 1;
+        }
+        
+        .loan-detail-label {
+            font-size: 12px;
+            color: #8E8E93;
+            margin-bottom: 4px;
+        }
+        
+        .loan-detail-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .loan-progress {
+            margin-bottom: 20px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #8E8E93;
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #F0F0F3;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #1E1E1E;
+            border-radius: 3px;
+        }
+        
+        .loan-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .loan-date {
+            font-size: 13px;
+            color: #8E8E93;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .loan-date svg {
+            width: 16px;
+            height: 16px;
+            stroke: #8E8E93;
+        }
+        
+        .loan-action {
+            color: #1E1E1E;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .loan-action svg {
+            width: 18px;
+            height: 18px;
+            stroke: #1E1E1E;
+        }
+        
+        /* Calculator and New Application Section */
+        .application-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .calculator-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            padding: 28px;
+        }
+        
+        .calculator-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .calculator-header svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1E1E1E;
+        }
+        
+        .calculator-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .amount-slider {
+            margin-bottom: 24px;
+        }
+        
+        .amount-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #8E8E93;
+            margin-bottom: 16px;
+        }
+        
+        .amount-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .slider-container {
+            position: relative;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+        
+        .slider-track {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 6px;
+            background: #F0F0F3;
+            border-radius: 3px;
+        }
+        
+        .slider-fill {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 6px;
+            width: 60%;
+            background: #1E1E1E;
+            border-radius: 3px;
+        }
+        
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: #FFFFFF;
+            border: 2px solid #1E1E1E;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #8E8E93;
+        }
+        
+        .calculator-breakdown {
+            background: #F8F8FA;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .breakdown-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .breakdown-label {
+            color: #8E8E93;
+            font-size: 14px;
+        }
+        
+        .breakdown-value {
+            font-weight: 600;
+            color: #1E1E1E;
+            font-size: 16px;
+        }
+        
+        .breakdown-total {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #E5E5EA;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 16px;
+            color: #1E1E1E;
+        }
+        
+        .new-application-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            padding: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #8E8E93;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .form-input {
+            width: 100%;
+            background: #F8F8FA;
+            border: 1px solid #F0F0F3;
+            border-radius: 16px;
+            padding: 16px 18px;
+            font-size: 15px;
+            color: #1E1E1E;
+            outline: none;
+            transition: all 0.2s ease;
+            -webkit-appearance: none;
+        }
+        
+        .form-input:focus {
+            border-color: #1E1E1E;
+            background: #FFFFFF;
+        }
+        
+        .purpose-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .purpose-chip {
+            padding: 10px 18px;
+            background: #F8F8FA;
+            border: 1px solid #F0F0F3;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #1E1E1E;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .purpose-chip.selected {
+            background: #1E1E1E;
+            color: #FFFFFF;
+            border-color: #1E1E1E;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        
+        .terms-checkbox input {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 2px solid #E5E5EA;
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .terms-checkbox input:checked {
+            background: #1E1E1E;
+            border-color: #1E1E1E;
+        }
+        
+        .terms-checkbox input:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .terms-checkbox span {
+            font-size: 14px;
+            color: #1E1E1E;
+        }
+        
+        .terms-checkbox span a {
+            color: #1E1E1E;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            padding: 18px;
+            background: #1E1E1E;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .apply-btn:hover {
+            background: #2C2C2E;
+        }
+        
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 16px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        /* Modal */
+        .modal {
+            background: #FFFFFF;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #8E8E93;
+        }
+        
+        /* Detail Modal */
+        .detail-section {
+            margin-bottom: 28px;
+        }
+        
+        .detail-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #8E8E93;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .detail-grid {
+            background: #F8F8FA;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-row-label {
+            color: #8E8E93;
+            font-size: 14px;
+        }
+        
+        .detail-row-value {
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .timeline {
+            margin: 24px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: #1E1E1E;
+            margin-top: 6px;
+        }
+        
+        .timeline-dot.completed {
+            background: #34C759;
+        }
+        
+        .timeline-dot.pending {
+            background: #FF9F0A;
+        }
+        
+        .timeline-content {
+            flex: 1;
+        }
+        
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .timeline-date {
+            font-size: 13px;
+            color: #8E8E93;
+        }
+        
+        .document-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge.verified {
+            background: #E4F2E4;
+            color: #34C759;
+        }
+        
+        .badge.pending {
+            background: #FFF4E0;
+            color: #FF9F0A;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-align: center;
+        }
+        
+        .modal-btn.primary {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        .modal-btn.primary:hover {
+            background: #2C2C2E;
+        }
+        
+        .modal-btn.secondary {
+            background: #FFFFFF;
+            color: #1E1E1E;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .modal-btn.secondary:hover {
+            background: #F8F8FA;
+        }
+        
+        .modal-btn.danger {
+            background: #FF3B30;
+            color: #FFFFFF;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* ---------- MOBILE RESPONSIVE FIXES ---------- */
+        @media (max-width: 768px) {
+            .web-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 20px 16px;
+                border-right: none;
+                border-bottom: 1px solid #F0F0F3;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 20px;
+            }
+
+            .nav-menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .nav-item svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .user-section {
+                margin-top: 0;
+                padding-top: 16px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .user-name {
+                font-size: 14px;
+            }
+
+            .user-email {
+                font-size: 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .header-left h1 {
+                font-size: 24px;
+            }
+
+            .header-left p {
+                font-size: 14px;
+            }
+
+            .header-right {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .search-box {
+                width: 100%;
+                padding: 8px 16px;
+            }
+
+            .notification-btn {
+                width: 44px;
+                height: 44px;
+                position: absolute;
+                top: 20px;
+                right: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .stat-card {
+                padding: 18px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .stat-trend {
+                font-size: 12px;
+            }
+
+            .eligibility-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                padding: 24px;
+            }
+
+            .eligibility-details {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .detail-item {
+                min-width: 100px;
+            }
+
+            .eligibility-badge {
+                align-self: flex-start;
+            }
+
+            .tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 12px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab {
+                flex-shrink: 0;
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .loans-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .loan-card {
+                padding: 20px;
+            }
+
+            .loan-amount {
+                font-size: 28px;
+            }
+
+            .loan-details {
+                gap: 16px;
+            }
+
+            .application-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .calculator-card,
+            .new-application-card {
+                padding: 24px;
+            }
+
+            .amount-value {
+                font-size: 24px;
+            }
+
+            .slider-handle {
+                width: 28px;
+                height: 28px;
+            }
+
+            .purpose-grid {
+                gap: 6px;
+            }
+
+            .purpose-chip {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+
+            .apply-btn {
+                padding: 16px;
+                font-size: 15px;
+            }
+
+            .modal {
+                padding: 24px 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 22px;
+            }
+
+            .detail-grid {
+                padding: 16px;
+            }
+
+            .timeline-item {
+                gap: 12px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .eligibility-details {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .loan-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .loan-details {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .loan-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .loan-action {
+                align-self: flex-end;
+            }
+
+            .modal {
+                padding: 20px 16px;
+            }
+
+            .document-badges {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .badge {
+                display: inline-block;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="web-container">
+        <!-- Sidebar -->
+        <div class="sidebar fade-in">
+            <div class="sidebar-logo">
+                <div class="logo-mark">
+                    <span>JMR</span>
+                </div>
+                <span class="logo-text">JMR Capital</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 10L12 3L21 10V20C21 20.5 20.6 21 20 21H16C15.4 21 15 20.5 15 20V15H9V20C9 20.5 8.6 21 8 21H4C3.4 21 3 20.5 3 20V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="loans.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Loans
+                </a>
+                <a href="documents.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Documents
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Profile
+                </a>
+            </div>
+            
+            <div class="user-section">
+                <div class="user-avatar">
+                    <span>JD</span>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john.doe@example.com</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header fade-in">
+                <div class="header-left">
+                    <h1>Loans</h1>
+                    <p>Manage your loan applications</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M21 21L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" placeholder="Search applications...">
+                    </div>
+                    <a href="notifications.html" class="notification-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 8C18 6.4 17.4 4.9 16.2 3.7C15 2.5 13.5 2 12 2C10.5 2 9 2.5 7.8 3.7C6.6 4.9 6 6.4 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M13.7 20C13.5 20.3 13.3 20.5 12.9 20.7C12.6 20.9 12.3 21 12 21C11.7 21 11.4 20.9 11.1 20.7C10.8 20.5 10.5 20.3 10.3 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid fade-in">
+                <div class="stat-card">
+                    <div class="stat-label">Total loans</div>
+                    <div class="stat-value">R 4,500</div>
+                    <div class="stat-trend">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        2 active
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Available</div>
+                    <div class="stat-value">R 3,000</div>
+                    <div class="stat-trend" style="color: #8E8E93;">Pre-approved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Next payment</div>
+                    <div class="stat-value">R 525</div>
+                    <div class="stat-trend" style="color: #FF9F0A;">Due 3 Apr</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Interest rate</div>
+                    <div class="stat-value">5%</div>
+                    <div class="stat-trend" style="color: #8E8E93;">Fixed</div>
+                </div>
+            </div>
+            
+            <!-- Eligibility Card -->
+            <div class="eligibility-card fade-in">
+                <div class="eligibility-content">
+                    <h2>You're pre-approved for a loan</h2>
+                    <p>Based on your profile and document status</p>
+                    <div class="eligibility-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Max amount</span>
+                            <span class="detail-value">R 3,000</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Min amount</span>
+                            <span class="detail-value">R 500</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Interest</span>
+                            <span class="detail-value">5%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Term</span>
+                            <span class="detail-value">30 days</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="eligibility-badge">Eligible</div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs fade-in">
+                <button class="tab active">All applications</button>
+                <button class="tab">Pending</button>
+                <button class="tab">Approved</button>
+                <button class="tab">Repaid</button>
+            </div>
+            
+            <!-- Loans Grid -->
+            <div class="loans-grid fade-in">
+                <!-- Application 1 - Pending -->
+                <a href="#" class="loan-card" onclick="openModal('applicationModal1'); return false;">
+                    <div class="loan-header">
+                        <span class="loan-id">L-20260303-1234</span>
+                        <span class="loan-status status-pending">Pending review</span>
+                    </div>
+                    <div class="loan-amount">R 2,000</div>
+                    <div class="loan-details">
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Total repayment</div>
+                            <div class="loan-detail-value">R 2,100</div>
+                        </div>
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Interest</div>
+                            <div class="loan-detail-value">R 100</div>
+                        </div>
+                    </div>
+                    <div class="loan-progress">
+                        <div class="progress-header">
+                            <span>Progress</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div class="loan-footer">
+                        <div class="loan-date">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M3 10H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M8 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M16 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                            <span>3 Mar 2026</span>
+                        </div>
+                        <div class="loan-action">
+                            View details
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Application 2 - Approved -->
+                <a href="#" class="loan-card" onclick="openModal('applicationModal2'); return false;">
+                    <div class="loan-header">
+                        <span class="loan-id">L-20260228-5678</span>
+                        <span class="loan-status status-approved">Approved</span>
+                    </div>
+                    <div class="loan-amount">R 1,500</div>
+                    <div class="loan-details">
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Total repayment</div>
+                            <div class="loan-detail-value">R 1,575</div>
+                        </div>
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Interest</div>
+                            <div class="loan-detail-value">R 75</div>
+                        </div>
+                    </div>
+                    <div class="loan-progress">
+                        <div class="progress-header">
+                            <span>Disbursement</span>
+                            <span>Pending</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="loan-footer">
+                        <div class="loan-date">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M3 10H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M8 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M16 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                            <span>28 Feb 2026</span>
+                        </div>
+                        <div class="loan-action">
+                            View details
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Application 3 - Disbursed -->
+                <a href="#" class="loan-card" onclick="openModal('applicationModal3'); return false;">
+                    <div class="loan-header">
+                        <span class="loan-id">L-20260215-9012</span>
+                        <span class="loan-status status-disbursed">Disbursed</span>
+                    </div>
+                    <div class="loan-amount">R 3,000</div>
+                    <div class="loan-details">
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Total repayment</div>
+                            <div class="loan-detail-value">R 3,150</div>
+                        </div>
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Interest</div>
+                            <div class="loan-detail-value">R 150</div>
+                        </div>
+                    </div>
+                    <div class="loan-progress">
+                        <div class="progress-header">
+                            <span>Repaid</span>
+                            <span>33%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 33%"></div>
+                        </div>
+                    </div>
+                    <div class="loan-footer">
+                        <div class="loan-date">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M3 10H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M8 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M16 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                            <span>15 Feb 2026</span>
+                        </div>
+                        <div class="loan-action">
+                            View details
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Application 4 - Repaid -->
+                <a href="#" class="loan-card" onclick="openModal('applicationModal4'); return false;">
+                    <div class="loan-header">
+                        <span class="loan-id">L-20260110-3456</span>
+                        <span class="loan-status status-repaid">Repaid</span>
+                    </div>
+                    <div class="loan-amount">R 1,000</div>
+                    <div class="loan-details">
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Total repaid</div>
+                            <div class="loan-detail-value">R 1,050</div>
+                        </div>
+                        <div class="loan-detail">
+                            <div class="loan-detail-label">Interest</div>
+                            <div class="loan-detail-value">R 50</div>
+                        </div>
+                    </div>
+                    <div class="loan-progress">
+                        <div class="progress-header">
+                            <span>Status</span>
+                            <span>Completed</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="loan-footer">
+                        <div class="loan-date">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M3 10H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M8 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M16 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                            <span>10 Jan 2026</span>
+                        </div>
+                        <div class="loan-action">
+                            View details
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Calculator and New Application Section -->
+            <div class="application-section fade-in">
+                <!-- Calculator -->
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M7 8H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M7 12H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M7 16H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <h3>Loan calculator</h3>
+                    </div>
+                    
+                    <div class="amount-slider">
+                        <div class="amount-label">
+                            <span>Loan amount</span>
+                            <span class="amount-value">R 2,000</span>
+                        </div>
+                        
+                        <div class="slider-container">
+                            <div class="slider-track"></div>
+                            <div class="slider-fill" style="width: 60%"></div>
+                            <div class="slider-handle" style="left: 60%"></div>
+                        </div>
+                        
+                        <div class="slider-labels">
+                            <span>R 500</span>
+                            <span>R 3,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-breakdown">
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Principal</span>
+                            <span class="breakdown-value">R 2,000</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Interest (5%)</span>
+                            <span class="breakdown-value">R 100</span>
+                        </div>
+                        <div class="breakdown-total">
+                            <span>Total repayment</span>
+                            <span>R 2,100</span>
+                        </div>
+                    </div>
+                    
+                    <div style="font-size: 13px; color: #8E8E93; text-align: center;">
+                        Fixed interest rate · Single repayment at term end
+                    </div>
+                </div>
+                
+                <!-- New Application -->
+                <div class="new-application-card" id="apply">
+                    <div class="calculator-header">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h3>New application</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Loan amount</label>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 18px; color: #1E1E1E;">R</span>
+                            <input type="text" class="form-input" value="2000" placeholder="Enter amount">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Purpose</label>
+                        <div class="purpose-grid">
+                            <span class="purpose-chip selected">Emergency</span>
+                            <span class="purpose-chip">Education</span>
+                            <span class="purpose-chip">Medical</span>
+                            <span class="purpose-chip">Home</span>
+                            <span class="purpose-chip">Vehicle</span>
+                            <span class="purpose-chip">Debt</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Additional details (optional)</label>
+                        <input type="text" class="form-input" placeholder="e.g., unexpected medical expenses" value="Need to cover unexpected medical expenses">
+                    </div>
+                    
+                    <label class="terms-checkbox">
+                        <input type="checkbox" checked>
+                        <span>I accept the <a href="#">terms and conditions</a></span>
+                    </label>
+                    
+                    <button class="apply-btn" onclick="openModal('successModal')">Apply for loan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Detail Modal - Pending -->
+    <div class="modal-overlay" id="applicationModal1" onclick="closeModalOnOverlay(event, 'applicationModal1')">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Application details</h2>
+                <button class="close-btn" onclick="closeModal('applicationModal1')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span style="font-size: 14px; color: #8E8E93;">L-20260303-1234</span>
+                <span class="loan-status status-pending">Pending review</span>
+            </div>
+            
+            <div class="detail-section">
+                <div class="detail-section-title">Loan summary</div>
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <span class="detail-row-label">Amount requested</span>
+                        <span class="detail-row-value">R 2,000</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-row-label">Total repayment</span>
+                        <span class="detail-row-value">R 2,100</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-row-label">Interest (5%)</span>
+                        <span class="detail-row-value">R 100</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-row-label">Purpose</span>
+                        <span class="detail-row-value">Emergency</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-row-label">Submitted</span>
+                        <span class="detail-row-value">3 Mar 2026, 10:35</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="detail-section">
+                <div class="detail-section-title">Timeline</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Application submitted</div>
+                            <div class="timeline-date">3 Mar 2026, 10:35</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot pending"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Under review</div>
+                            <div class="timeline-date">Expected within 24 hours</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">Decision</div>
+                            <div class="timeline-date">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="detail-section">
+                <div class="detail-section-title">Documents</div>
+                <div class="document-badges">
+                    <span class="badge verified">ID Verified</span>
+                    <span class="badge verified">Bank Statement Verified</span>
+                    <span class="badge pending">Payslip Pending</span>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeModal('applicationModal1')">Close</button>
+                <button class="modal-btn danger" onclick="openModal('cancelModal')">Cancel application</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel Confirmation Modal -->
+    <div class="modal-overlay" id="cancelModal" onclick="closeModalOnOverlay(event, 'cancelModal')">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Cancel application</h2>
+                <button class="close-btn" onclick="closeModal('cancelModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin: 32px 0;">
+                <svg viewBox="0 0 24 24" width="48" height="48" style="stroke: #FF3B30; margin-bottom: 16px;">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <p style="font-size: 16px; color: #1E1E1E; margin-bottom: 8px;">Cancel this application?</p>
+                <p style="font-size: 14px; color: #8E8E93;">This action cannot be undone</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeModal('cancelModal')">Keep</button>
+                <button class="modal-btn danger" onclick="closeModal('cancelModal'); closeModal('applicationModal1');">Yes, cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal" onclick="closeModalOnOverlay(event, 'successModal')">
+        <div class="modal" style="max-width: 400px; text-align: center;">
+            <div class="modal-header">
+                <h2>Application submitted</h2>
+                <button class="close-btn" onclick="closeModal('successModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div style="margin: 32px 0;">
+                <svg viewBox="0 0 24 24" width="64" height="64" style="stroke: #34C759; margin-bottom: 16px;">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <p style="font-size: 16px; color: #1E1E1E; margin-bottom: 8px;">Your application has been submitted</p>
+                <p style="font-size: 14px; color: #8E8E93;">You'll receive a notification within 24 hours</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn primary" onclick="closeModal('successModal')">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        function closeModalOnOverlay(event, modalId) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModal(modalId);
+            }
+        }
+    </script>
+</body>
+</html>

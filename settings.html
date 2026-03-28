@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>JMR Capital · Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8F8FA;
+            min-height: 100vh;
+        }
+        
+        .web-container {
+            display: flex;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: #FFFFFF;
+            border-right: 1px solid #F0F0F3;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: #1E1E1E;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-mark span {
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #8E8E93;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            fill: none;
+        }
+        
+        .nav-item:hover {
+            background: #F8F8FA;
+            color: #1E1E1E;
+        }
+        
+        .nav-item.active {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        .nav-item.active svg {
+            stroke: #FFFFFF;
+        }
+        
+        .user-section {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 1px solid #F0F0F3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            background: #F8F8FA;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .user-avatar span {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1E1E1E;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 2px;
+        }
+        
+        .user-email {
+            font-size: 13px;
+            color: #8E8E93;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 32px 40px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .header-left p {
+            font-size: 15px;
+            color: #8E8E93;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        
+        .settings-card {
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            padding: 28px;
+        }
+        
+        .settings-card.full-width {
+            grid-column: span 2;
+        }
+        
+        .settings-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .settings-header svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1E1E1E;
+        }
+        
+        .settings-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #F0F0F3;
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-item-info h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .settings-item-info p {
+            font-size: 14px;
+            color: #8E8E93;
+        }
+        
+        .toggle-switch {
+            width: 52px;
+            height: 28px;
+            background: #E5E5EA;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #1E1E1E;
+        }
+        
+        .toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(24px);
+        }
+        
+        .select-input {
+            padding: 8px 16px;
+            background: #F8F8FA;
+            border: 1px solid #F0F0F3;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #1E1E1E;
+            outline: none;
+            min-width: 120px;
+        }
+        
+        .danger-zone {
+            background: #FFF5F5;
+            border-color: #FFE5E5;
+        }
+        
+        .danger-zone .settings-header h2 {
+            color: #FF3B30;
+        }
+        
+        .danger-zone .settings-header svg {
+            stroke: #FF3B30;
+        }
+        
+        .btn {
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #F0F0F3;
+            color: #1E1E1E;
+        }
+        
+        .btn-outline:hover {
+            background: #F8F8FA;
+        }
+        
+        .btn-danger {
+            background: #FF3B30;
+            color: #FFFFFF;
+        }
+        
+        .btn-danger:hover {
+            background: #FF5252;
+        }
+
+        /* ---------- MOBILE RESPONSIVE FIXES ---------- */
+        @media (max-width: 768px) {
+            .web-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 20px 16px;
+                border-right: none;
+                border-bottom: 1px solid #F0F0F3;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 20px;
+            }
+
+            .nav-menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .nav-item svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .user-section {
+                margin-top: 0;
+                padding-top: 16px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .user-name {
+                font-size: 14px;
+            }
+
+            .user-email {
+                font-size: 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .header-left h1 {
+                font-size: 24px;
+            }
+
+            .header-left p {
+                font-size: 14px;
+            }
+
+            .header-right {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .settings-card.full-width {
+                grid-column: span 1;
+            }
+
+            .settings-card {
+                padding: 20px;
+            }
+
+            .settings-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .settings-item-info {
+                width: 100%;
+            }
+
+            .btn, .select-input {
+                width: 100%;
+                text-align: center;
+            }
+
+            .toggle-switch {
+                align-self: flex-start;
+            }
+
+            .danger-zone > div:last-child {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .btn-danger {
+                width: 100%;
+            }
+
+            .select-input {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-header {
+                flex-wrap: wrap;
+            }
+
+            .settings-header svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .settings-header h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="web-container">
+        <div class="sidebar fade-in">
+            <div class="sidebar-logo">
+                <div class="logo-mark"><span>JMR</span></div>
+                <span class="logo-text">JMR Capital</span>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 10L12 3L21 10V20C21 20.5 20.6 21 20 21H16C15.4 21 15 20.5 15 20V15H9V20C9 20.5 8.6 21 8 21H4C3.4 21 3 20.5 3 20V10Z"/></svg>
+                    Dashboard
+                </a>
+                <a href="loans.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6"/></svg>
+                    Loans
+                </a>
+                <a href="documents.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"/><path d="M22 6L12 13L2 6"/></svg>
+                    Documents
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21"/><circle cx="12" cy="7" r="4"/></svg>
+                    Profile
+                </a>
+            </div>
+            <div class="user-section">
+                <div class="user-avatar"><span>JD</span></div>
+                <div class="user-info">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john.doe@example.com</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="header fade-in">
+                <div class="header-left">
+                    <h1>Settings</h1>
+                    <p>Manage your account preferences</p>
+                </div>
+            </div>
+            
+            <div class="settings-grid">
+                <!-- Account Settings -->
+                <div class="settings-card">
+                    <div class="settings-header">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21"/></svg>
+                        <h2>Account</h2>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Email address</h3>
+                            <p>john.doe@example.com</p>
+                        </div>
+                        <button class="btn btn-outline">Change</button>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Password</h3>
+                            <p>Last changed 30 days ago</p>
+                        </div>
+                        <button class="btn btn-outline">Update</button>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Phone number</h3>
+                            <p>082 123 4567</p>
+                        </div>
+                        <button class="btn btn-outline">Change</button>
+                    </div>
+                </div>
+                
+                <!-- Notification Preferences -->
+                <div class="settings-card">
+                    <div class="settings-header">
+                        <svg viewBox="0 0 24 24"><path d="M18 8C18 6.4 17.4 4.9 16.2 3.7C15 2.5 13.5 2 12 2C10.5 2 9 2.5 7.8 3.7C6.6 4.9 6 6.4 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"/><path d="M13.7 20C13.5 20.3 13.3 20.5 12.9 20.7C12.6 20.9 12.3 21 12 21C11.7 21 11.4 20.9 11.1 20.7C10.8 20.5 10.5 20.3 10.3 20"/></svg>
+                        <h2>Notifications</h2>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Push notifications</h3>
+                            <p>Receive alerts on your device</p>
+                        </div>
+                        <div class="toggle-switch active">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Email notifications</h3>
+                            <p>Receive updates via email</p>
+                        </div>
+                        <div class="toggle-switch active">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>SMS alerts</h3>
+                            <p>Get text message updates</p>
+                        </div>
+                        <div class="toggle-switch">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Privacy & Security -->
+                <div class="settings-card">
+                    <div class="settings-header">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <h2>Privacy & Security</h2>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Biometric login</h3>
+                            <p>Use fingerprint or face ID</p>
+                        </div>
+                        <div class="toggle-switch active">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Two-factor authentication</h3>
+                            <p>Add an extra layer of security</p>
+                        </div>
+                        <div class="toggle-switch">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Session timeout</h3>
+                            <p>Auto-logout after 15 minutes</p>
+                        </div>
+                        <select class="select-input">
+                            <option>15 minutes</option>
+                            <option>30 minutes</option>
+                            <option>1 hour</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Language & Region -->
+                <div class="settings-card">
+                    <div class="settings-header">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <h2>Language & Region</h2>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Language</h3>
+                            <p>Choose your preferred language</p>
+                        </div>
+                        <select class="select-input">
+                            <option>English</option>
+                            <option>Afrikaans</option>
+                            <option>isiZulu</option>
+                            <option>isiXhosa</option>
+                        </select>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Currency</h3>
+                            <p>Display amounts in</p>
+                        </div>
+                        <select class="select-input">
+                            <option>ZAR (R)</option>
+                            <option>USD ($)</option>
+                        </select>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <h3>Date format</h3>
+                            <p>How dates are shown</p>
+                        </div>
+                        <select class="select-input">
+                            <option>DD/MM/YYYY</option>
+                            <option>MM/DD/YYYY</option>
+                            <option>YYYY-MM-DD</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Danger Zone -->
+                <div class="settings-card full-width danger-zone">
+                    <div class="settings-header">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                        <h2>Danger Zone</h2>
+                    </div>
+                    <div style="display: flex; gap: 16px; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="font-size: 16px; font-weight: 600; color: #1E1E1E; margin-bottom: 4px;">Delete account</h3>
+                            <p style="font-size: 14px; color: #8E8E93;">Permanently delete your account and all associated data</p>
+                        </div>
+                        <button class="btn btn-danger">Delete account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

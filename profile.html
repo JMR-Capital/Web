@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>JMR Capital · Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8F8FA;
+            min-height: 100vh;
+        }
+        
+        .web-container {
+            display: flex;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #FFFFFF;
+            border-right: 1px solid #F0F0F3;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: #1E1E1E;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-mark span {
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #8E8E93;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            fill: none;
+        }
+        
+        .nav-item:hover {
+            background: #F8F8FA;
+            color: #1E1E1E;
+        }
+        
+        .nav-item.active {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        .nav-item.active svg {
+            stroke: #FFFFFF;
+        }
+        
+        .user-section {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 1px solid #F0F0F3;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            background: #F8F8FA;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .user-avatar span {
+            font-size: 18px;
+            font-weight: 500;
+            color: #1E1E1E;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 2px;
+        }
+        
+        .user-email {
+            font-size: 13px;
+            color: #8E8E93;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 32px 40px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .header-left p {
+            font-size: 15px;
+            color: #8E8E93;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 280px;
+        }
+        
+        .search-box svg {
+            width: 20px;
+            height: 20px;
+            stroke: #8E8E93;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #1E1E1E;
+            width: 100%;
+        }
+        
+        .notification-btn {
+            width: 48px;
+            height: 48px;
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .notification-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: #1E1E1E;
+        }
+        
+        /* Profile Header */
+        .profile-header {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid #F0F0F3;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: #1E1E1E;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .profile-avatar span {
+            color: #FFFFFF;
+            font-size: 40px;
+            font-weight: 500;
+        }
+        
+        .avatar-edit {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 32px;
+            height: 32px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #F0F0F3;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .avatar-edit svg {
+            width: 16px;
+            height: 16px;
+            stroke: #1E1E1E;
+        }
+        
+        .profile-info h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 8px;
+        }
+        
+        .profile-info p {
+            font-size: 16px;
+            color: #8E8E93;
+            margin-bottom: 12px;
+        }
+        
+        .profile-badge {
+            background: #F2F2F7;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1E1E1E;
+            display: inline-block;
+            border: 1px solid #F0F0F3;
+        }
+        
+        /* Section Label */
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #8E8E93;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        
+        /* Profile Completion Card */
+        .completion-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border: 1px solid #F0F0F3;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .completion-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #1E1E1E;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .completion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .completion-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .completion-percentage {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .progress-bar-container {
+            height: 8px;
+            background: #F0F0F3;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            width: 40%;
+            background: #1E1E1E;
+            border-radius: 4px;
+        }
+        
+        /* Profile Grid */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        /* Info Cards */
+        .info-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .info-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .edit-btn {
+            background: none;
+            border: 1px solid #F0F0F3;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1E1E1E;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .edit-btn:hover {
+            background: #F8F8FA;
+        }
+        
+        .info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            background: #F8F8FA;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .info-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1E1E1E;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .info-label {
+            font-size: 13px;
+            color: #8E8E93;
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .info-value.secondary {
+            color: #6B6B6B;
+            font-size: 14px;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+        
+        /* Bank Card */
+        .bank-card {
+            background: linear-gradient(135deg, #F8F8FA 0%, #F0F0F3 100%);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #E8E8ED;
+        }
+        
+        .bank-logo {
+            width: 56px;
+            height: 56px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .bank-logo span {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .bank-details {
+            flex: 1;
+        }
+        
+        .bank-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .bank-account {
+            font-size: 15px;
+            color: #6B6B6B;
+            font-family: monospace;
+        }
+        
+        /* Documents Section */
+        .documents-card {
+            grid-column: span 2;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .document-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #F8F8FA;
+            border-radius: 16px;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .document-icon {
+            width: 48px;
+            height: 48px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .document-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1E1E1E;
+        }
+        
+        .document-info {
+            flex: 1;
+        }
+        
+        .document-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1E1E1E;
+            margin-bottom: 4px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge.verified {
+            background: #E4F2E4;
+            color: #34C759;
+        }
+        
+        .status-badge.pending {
+            background: #FFF4E0;
+            color: #FF9F0A;
+        }
+        
+        .status-badge.missing {
+            background: #FFE5E5;
+            color: #FF3B30;
+        }
+        
+        /* Logout Button */
+        .logout-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid #F0F0F3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            padding: 14px 32px;
+            background: #FFFFFF;
+            border: 1px solid #F0F0F3;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #FF3B30;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logout-btn:hover {
+            background: #F8F8FA;
+        }
+        
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #FF3B30;
+        }
+        
+        .account-delete {
+            color: #8E8E93;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .account-delete:hover {
+            color: #FF3B30;
+        }
+        
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 16px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        /* Modal */
+        .modal {
+            background: #FFFFFF;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1E1E1E;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #8E8E93;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #8E8E93;
+            margin-bottom: 8px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .form-input {
+            width: 100%;
+            background: #F8F8FA;
+            border: 1px solid #F0F0F3;
+            border-radius: 16px;
+            padding: 16px 18px;
+            font-size: 16px;
+            color: #1E1E1E;
+            outline: none;
+            transition: all 0.2s ease;
+            -webkit-appearance: none;
+        }
+        
+        .form-input:focus {
+            border-color: #1E1E1E;
+            background: #FFFFFF;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #E5E5EA;
+            border-radius: 9px;
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .radio-item input[type="radio"]:checked {
+            border-color: #1E1E1E;
+        }
+        
+        .radio-item input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 8px;
+            height: 8px;
+            background: #1E1E1E;
+            border-radius: 4px;
+        }
+        
+        .radio-item span {
+            font-size: 15px;
+            color: #1E1E1E;
+        }
+        
+        /* Checkbox */
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            margin: 16px 0;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            border-radius: 6px;
+            border: 2px solid #E5E5EA;
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .checkbox-item input[type="checkbox"]:checked {
+            background: #1E1E1E;
+            border-color: #1E1E1E;
+        }
+        
+        .checkbox-item input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .checkbox-item span {
+            font-size: 15px;
+            color: #1E1E1E;
+        }
+        
+        /* Select */
+        .form-select {
+            width: 100%;
+            background: #F8F8FA;
+            border: 1px solid #F0F0F3;
+            border-radius: 16px;
+            padding: 16px 18px;
+            font-size: 16px;
+            color: #1E1E1E;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%238E8E93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+        }
+        
+        /* Modal Actions */
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 16px 0;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-align: center;
+        }
+        
+        .modal-btn.primary {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        .modal-btn.primary:hover {
+            background: #2C2C2E;
+        }
+        
+        .modal-btn.secondary {
+            background: #FFFFFF;
+            color: #1E1E1E;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .modal-btn.secondary:hover {
+            background: #F8F8FA;
+        }
+        
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #E5E5EA;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        
+        .upload-area svg {
+            width: 32px;
+            height: 32px;
+            stroke: #8E8E93;
+            margin-bottom: 8px;
+        }
+        
+        .upload-area p {
+            color: #8E8E93;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* ---------- MOBILE RESPONSIVE FIXES ---------- */
+        @media (max-width: 768px) {
+            .web-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 20px 16px;
+                border-right: none;
+                border-bottom: 1px solid #F0F0F3;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 20px;
+            }
+
+            .nav-menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .nav-item svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .user-section {
+                margin-top: 0;
+                padding-top: 16px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .user-name {
+                font-size: 14px;
+            }
+
+            .user-email {
+                font-size: 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .header-left h1 {
+                font-size: 24px;
+            }
+
+            .header-left p {
+                font-size: 14px;
+            }
+
+            .header-right {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .search-box {
+                width: 100%;
+                padding: 8px 16px;
+            }
+
+            .notification-btn {
+                width: 44px;
+                height: 44px;
+                position: absolute;
+                top: 20px;
+                right: 16px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 20px;
+                padding: 24px;
+            }
+
+            .profile-info h2 {
+                font-size: 24px;
+            }
+
+            .profile-info p {
+                font-size: 15px;
+            }
+
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .profile-avatar span {
+                font-size: 32px;
+            }
+
+            .avatar-edit {
+                width: 28px;
+                height: 28px;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .documents-card {
+                grid-column: span 1;
+            }
+
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .document-item {
+                flex-wrap: wrap;
+            }
+
+            .info-row {
+                flex-wrap: wrap;
+            }
+
+            .info-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .info-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .bank-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .bank-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .logout-section {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+
+            .logout-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal {
+                padding: 24px 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 22px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+                margin-bottom: 0;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 20px;
+            }
+
+            .radio-group {
+                gap: 12px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                width: 100%;
+            }
+
+            .upload-area {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                padding: 20px;
+            }
+
+            .info-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .edit-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .document-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .document-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .document-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .bank-card {
+                padding: 16px;
+            }
+
+            .modal {
+                padding: 20px 16px;
+            }
+
+            .modal-header {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="web-container">
+        <!-- Sidebar -->
+        <div class="sidebar fade-in">
+            <div class="sidebar-logo">
+                <div class="logo-mark">
+                    <span>JMR</span>
+                </div>
+                <span class="logo-text">JMR Capital</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 10L12 3L21 10V20C21 20.5 20.6 21 20 21H16C15.4 21 15 20.5 15 20V15H9V20C9 20.5 8.6 21 8 21H4C3.4 21 3 20.5 3 20V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="loans.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Loans
+                </a>
+                <a href="documents.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Documents
+                </a>
+                <a href="profile.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Profile
+                </a>
+            </div>
+            
+            <div class="user-section">
+                <div class="user-avatar">
+                    <span>JD</span>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john.doe@example.com</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header fade-in">
+                <div class="header-left">
+                    <h1>Profile</h1>
+                    <p>Manage your personal information</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M21 21L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <a href="notifications.html" class="notification-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 8C18 6.4 17.4 4.9 16.2 3.7C15 2.5 13.5 2 12 2C10.5 2 9 2.5 7.8 3.7C6.6 4.9 6 6.4 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M13.7 20C13.5 20.3 13.3 20.5 12.9 20.7C12.6 20.9 12.3 21 12 21C11.7 21 11.4 20.9 11.1 20.7C10.8 20.5 10.5 20.3 10.3 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Profile Header -->
+            <div class="profile-header fade-in">
+                <div class="profile-avatar">
+                    <span>JD</span>
+                    <div class="avatar-edit">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h2>John Doe</h2>
+                    <p>john.doe@example.com</p>
+                    <span class="profile-badge">Applicant</span>
+                </div>
+            </div>
+            
+            <!-- Profile Completion -->
+            <div class="completion-card fade-in">
+                <div class="completion-header">
+                    <h3>Profile completion</h3>
+                    <span class="completion-percentage">40%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 40%"></div>
+                </div>
+            </div>
+            
+            <!-- Profile Grid -->
+            <div class="profile-grid">
+                <!-- Personal Information -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <h3>Personal information</h3>
+                        <button class="edit-btn" onclick="openModal('personalModal')">Edit</button>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Full name</div>
+                                <div class="info-value">John Doe</div>
+                                <div class="info-value secondary">ID: 800101 5009 087</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Contact</div>
+                                <div class="info-value">082 123 4567</div>
+                                <div class="info-value secondary">john.doe@example.com</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Date of birth</div>
+                                <div class="info-value">1 January 1980</div>
+                                <div class="info-value secondary">Male · SA Citizen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Address -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <h3>Address</h3>
+                        <button class="edit-btn" onclick="openModal('addressModal')">Edit</button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <div class="info-value">123 Main Street</div>
+                            <div class="info-value secondary">Sandton, Johannesburg, 2196</div>
+                            <div class="info-value secondary">Gauteng</div>
+                            <div class="info-value secondary" style="margin-top: 8px;">Own · 5 years</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Employment -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <h3>Employment</h3>
+                        <button class="edit-btn" onclick="openModal('employmentModal')">Edit</button>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M16 7V5C16 3.9 15.1 3 14 3H10C8.9 3 8 3.9 8 5V7" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Employer</div>
+                                <div class="info-value">Example Corp</div>
+                                <div class="info-value secondary">Software Developer</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M8 8H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Income</div>
+                                <div class="info-value">R 25,000 / month</div>
+                                <div class="info-value secondary">Permanent · 5 years</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bank Account -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <h3>Bank account</h3>
+                        <button class="edit-btn" onclick="openModal('bankModal')">Edit</button>
+                    </div>
+                    <div class="bank-card">
+                        <div class="bank-logo">
+                            <span>FNB</span>
+                        </div>
+                        <div class="bank-details">
+                            <div class="bank-name">First National Bank</div>
+                            <div class="bank-account">12345678 · Cheque · Branch 250655</div>
+                            <div class="bank-account" style="margin-top: 4px;">Account holder: John Doe</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Documents -->
+                <div class="info-card documents-card">
+                    <div class="info-header">
+                        <h3>Documents</h3>
+                        <button class="edit-btn" onclick="openModal('documentsModal')">Manage</button>
+                    </div>
+                    <div class="documents-grid">
+                        <div class="document-item">
+                            <div class="document-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M8 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="document-info">
+                                <div class="document-title">ID Front</div>
+                                <span class="status-badge verified">Verified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M8 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="document-info">
+                                <div class="document-title">ID Back</div>
+                                <span class="status-badge verified">Verified</span>
+                            </div>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="document-info">
+                                <div class="document-title">Payslip</div>
+                                <span class="status-badge pending">Pending</span>
+                            </div>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="document-info">
+                                <div class="document-title">Bank Statement</div>
+                                <span class="status-badge missing">Missing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logout Section -->
+            <div class="logout-section">
+                <button class="logout-btn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15 4H18C19.1 4 20 4.9 20 6V18C20 19.1 19.1 20 18 20H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M10 16L6 12L10 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M6 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                    Sign out
+                </button>
+                <span class="account-delete">Delete account</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Information Modal -->
+    <div class="modal-overlay" id="personalModal" onclick="closeModalOnOverlay(event, 'personalModal')">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Personal information</h2>
+                <button class="close-btn" onclick="closeModal('personalModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">First name</label>
+                    <input type="text" class="form-input" value="John">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Last name</label>
+                    <input type="text" class="form-input" value="Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">ID number</label>
+                    <input type="text" class="form-input" value="8001015009087">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="gender" checked>
+                                <span>Male</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Citizenship</label>
+                        <select class="form-select">
+                            <option selected>SA Citizen</option>
+                            <option>Permanent Resident</option>
+                            <option>Work Visa</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Cell phone</label>
+                    <input type="tel" class="form-input" value="0821234567">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-input" value="john.doe@example.com">
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('personalModal')">Cancel</button>
+                    <button type="button" class="modal-btn primary" onclick="closeModal('personalModal')">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Address Modal -->
+    <div class="modal-overlay" id="addressModal" onclick="closeModalOnOverlay(event, 'addressModal')">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Address</h2>
+                <button class="close-btn" onclick="closeModal('addressModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Street address</label>
+                    <input type="text" class="form-input" value="123 Main Street">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Suburb</label>
+                    <input type="text" class="form-input" value="Sandton">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-input" value="Johannesburg">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Postal code</label>
+                        <input type="text" class="form-input" value="2196">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Province</label>
+                    <select class="form-select">
+                        <option selected>Gauteng</option>
+                        <option>Western Cape</option>
+                        <option>KwaZulu-Natal</option>
+                        <option>Eastern Cape</option>
+                        <option>Free State</option>
+                        <option>Mpumalanga</option>
+                        <option>Limpopo</option>
+                        <option>North West</option>
+                        <option>Northern Cape</option>
+                    </select>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="sameAddress" checked>
+                    <label for="sameAddress">Same as residential address</label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Residence type</label>
+                    <select class="form-select">
+                        <option selected>Own</option>
+                        <option>Rent</option>
+                        <option>Living with family</option>
+                        <option>Employer provided</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Years at address</label>
+                    <input type="number" class="form-input" value="5">
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('addressModal')">Cancel</button>
+                    <button type="button" class="modal-btn primary" onclick="closeModal('addressModal')">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bank Account Modal -->
+    <div class="modal-overlay" id="bankModal" onclick="closeModalOnOverlay(event, 'bankModal')">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Bank account</h2>
+                <button class="close-btn" onclick="closeModal('bankModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Bank name</label>
+                    <select class="form-select">
+                        <option selected>FNB</option>
+                        <option>Standard Bank</option>
+                        <option>Absa</option>
+                        <option>Nedbank</option>
+                        <option>Capitec</option>
+                        <option>Investec</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Account type</label>
+                    <select class="form-select">
+                        <option selected>Cheque</option>
+                        <option>Savings</option>
+                        <option>Transmission</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Account number</label>
+                    <input type="text" class="form-input" value="12345678">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Branch code</label>
+                    <input type="text" class="form-input" value="250655">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Account holder name</label>
+                    <input type="text" class="form-input" value="John Doe">
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('bankModal')">Cancel</button>
+                    <button type="button" class="modal-btn primary" onclick="closeModal('bankModal')">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Employment Modal -->
+    <div class="modal-overlay" id="employmentModal" onclick="closeModalOnOverlay(event, 'employmentModal')">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Employment</h2>
+                <button class="close-btn" onclick="closeModal('employmentModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Employer name</label>
+                    <input type="text" class="form-input" value="Example Corp">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Employment type</label>
+                    <select class="form-select">
+                        <option selected>Permanent</option>
+                        <option>Contract</option>
+                        <option>Self-employed</option>
+                        <option>Part-time</option>
+                        <option>Unemployed</option>
+                        <option>Retired</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Monthly income (R)</label>
+                    <input type="text" class="form-input" value="25000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Occupation</label>
+                    <input type="text" class="form-input" value="Software Developer">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Started (year)</label>
+                        <input type="text" class="form-input" value="2020">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Work phone</label>
+                        <input type="text" class="form-input" value="0111234567">
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn secondary" onclick="closeModal('employmentModal')">Cancel</button>
+                    <button type="button" class="modal-btn primary" onclick="closeModal('employmentModal')">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Documents Modal -->
+    <div class="modal-overlay" id="documentsModal" onclick="closeModalOnOverlay(event, 'documentsModal')">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Documents</h2>
+                <button class="close-btn" onclick="closeModal('documentsModal')">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="documents-grid" style="grid-template-columns: 1fr; margin-bottom: 20px;">
+                <div class="document-item">
+                    <div class="document-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M8 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="document-info">
+                        <div class="document-title">ID Front</div>
+                        <span class="status-badge verified">Verified</span>
+                    </div>
+                    <div style="color: #8E8E93; cursor: pointer;">View</div>
+                </div>
+                
+                <div class="document-item">
+                    <div class="document-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M8 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="document-info">
+                        <div class="document-title">ID Back</div>
+                        <span class="status-badge verified">Verified</span>
+                    </div>
+                    <div style="color: #8E8E93; cursor: pointer;">View</div>
+                </div>
+                
+                <div class="document-item">
+                    <div class="document-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="document-info">
+                        <div class="document-title">Payslip</div>
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                    <div style="color: #8E8E93; cursor: pointer;">Replace</div>
+                </div>
+                
+                <div class="document-item">
+                    <div class="document-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M8 7H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="document-info">
+                        <div class="document-title">Bank Statement</div>
+                        <span class="status-badge missing">Missing</span>
+                    </div>
+                    <div style="color: #8E8E93; cursor: pointer;">Upload</div>
+                </div>
+            </div>
+            
+            <!-- Upload Area -->
+            <div class="upload-area">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 16V4M8 8L12 4L16 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M4 16V20H20V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <p>Click to upload new document</p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeModal('documentsModal')">Close</button>
+                <button class="modal-btn primary" onclick="closeModal('documentsModal')">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        function closeModalOnOverlay(event, modalId) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModal(modalId);
+            }
+        }
+    </script>
+</body>
+</html>
