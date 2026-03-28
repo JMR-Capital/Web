@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Connectivity Test</title>
+    <style>
+        body { font-family: monospace; padding: 2rem; }
+        pre { background: #f4f4f4; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+        button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Azure Functions Connectivity Test</h1>
+    <p>This page will test if your browser can reach the Azure Functions backend and if CORS is correctly configured.</p>
+
+    <button id="testBtn">Test API Health</button>
+    <div id="result"></div>
+
+    <script>
+        const API_BASE = 'https://jmrcapital-func-bxbvbvhsgha3eubj.southafricanorth-01.azurewebsites.net/api';
+
+        document.getElementById('testBtn').addEventListener('click', async () => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Testing...</p>';
+
+            try {
+                // Test the health endpoint
+                const healthRes = await fetch(`${API_BASE}/health`);
+                const healthData = await healthRes.json();
+                resultDiv.innerHTML = `
+                    <h3>✅ Health Check Success</h3>
+                    <pre>${JSON.stringify(healthData, null, 2)}</pre>
+                `;
+
+                // Optionally test a simple POST to register (but don't actually create a user)
+                // You can uncomment this if needed
+                /*
+                const registerRes = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        firstName: 'Test',
+                        lastName: 'User',
+                        email: `test${Date.now()}@example.com`,
+                        password: 'Test1234',
+                        confirmPassword: 'Test1234'
+                    })
+                });
+                const registerData = await registerRes.json();
+                console.log('Register response:', registerData);
+                */
+            } catch (err) {
+                resultDiv.innerHTML = `
+                    <h3 class="error">❌ Error</h3>
+                    <p>${err.message}</p>
+                    <p>Check the console for more details.</p>
+                `;
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>
