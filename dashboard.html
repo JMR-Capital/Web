@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="api-base" content="https://jmrcapital-func-bxbvbvhsgha3eubj.southafricanorth-01.azurewebsites.net/api">
     <title>JMR Capital · Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Keep all your original dashboard styles – unchanged */
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #F8F8FA;
             min-height: 100vh;
         }
+        
         .web-container {
             display: flex;
             max-width: 1440px;
             margin: 0 auto;
             min-height: 100vh;
         }
+        
+        /* Sidebar */
         .sidebar {
             width: 280px;
             background: #FFFFFF;
@@ -35,12 +38,14 @@
             position: fixed;
             height: 100vh;
         }
+        
         .sidebar-logo {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 40px;
         }
+        
         .logo-mark {
             width: 40px;
             height: 40px;
@@ -50,22 +55,26 @@
             align-items: center;
             justify-content: center;
         }
+        
         .logo-mark span {
             color: #FFFFFF;
             font-size: 20px;
             font-weight: 600;
         }
+        
         .logo-text {
             font-size: 20px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .nav-menu {
             flex: 1;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
+        
         .nav-item {
             display: flex;
             align-items: center;
@@ -83,6 +92,7 @@
             font-weight: 500;
             text-decoration: none;
         }
+        
         .nav-item svg {
             width: 22px;
             height: 22px;
@@ -90,17 +100,21 @@
             stroke-width: 1.8;
             fill: none;
         }
+        
         .nav-item:hover {
             background: #F8F8FA;
             color: #1E1E1E;
         }
+        
         .nav-item.active {
             background: #1E1E1E;
             color: #FFFFFF;
         }
+        
         .nav-item.active svg {
             stroke: #FFFFFF;
         }
+        
         .user-section {
             margin-top: auto;
             padding-top: 24px;
@@ -109,6 +123,7 @@
             align-items: center;
             gap: 12px;
         }
+        
         .user-avatar {
             width: 48px;
             height: 48px;
@@ -119,50 +134,62 @@
             justify-content: center;
             border: 1px solid #F0F0F3;
         }
+        
         .user-avatar span {
             font-size: 18px;
             font-weight: 500;
             color: #1E1E1E;
         }
+        
         .user-info {
             flex: 1;
         }
+        
         .user-name {
             font-size: 15px;
             font-weight: 600;
             color: #1E1E1E;
             margin-bottom: 2px;
         }
+        
         .user-email {
             font-size: 13px;
             color: #8E8E93;
         }
+        
+        /* Main Content */
         .main-content {
             flex: 1;
             margin-left: 280px;
             padding: 32px 40px;
         }
+        
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 32px;
         }
+        
         .header-left h1 {
             font-size: 28px;
             font-weight: 600;
             color: #1E1E1E;
             margin-bottom: 4px;
         }
+        
         .header-left p {
             font-size: 15px;
             color: #8E8E93;
         }
+        
         .header-right {
             display: flex;
             align-items: center;
             gap: 16px;
         }
+        
         .search-box {
             display: flex;
             align-items: center;
@@ -173,11 +200,13 @@
             padding: 10px 20px;
             width: 280px;
         }
+        
         .search-box svg {
             width: 20px;
             height: 20px;
             stroke: #8E8E93;
         }
+        
         .search-box input {
             border: none;
             outline: none;
@@ -185,9 +214,11 @@
             color: #1E1E1E;
             width: 100%;
         }
+        
         .search-box input::placeholder {
             color: #C6C6C8;
         }
+        
         .notification-btn {
             width: 48px;
             height: 48px;
@@ -199,17 +230,21 @@
             justify-content: center;
             cursor: pointer;
         }
+        
         .notification-btn svg {
             width: 22px;
             height: 22px;
             stroke: #1E1E1E;
         }
+        
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-bottom: 32px;
         }
+        
         .stat-card {
             background: #FFFFFF;
             border: 1px solid #F0F0F3;
@@ -219,6 +254,7 @@
             align-items: center;
             gap: 16px;
         }
+        
         .stat-icon {
             width: 56px;
             height: 56px;
@@ -228,42 +264,51 @@
             align-items: center;
             justify-content: center;
         }
+        
         .stat-icon svg {
             width: 28px;
             height: 28px;
             stroke: #1E1E1E;
         }
+        
         .stat-content h3 {
             font-size: 14px;
             font-weight: 500;
             color: #8E8E93;
             margin-bottom: 4px;
         }
+        
         .stat-content p {
             font-size: 28px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
+        /* Digital Card */
         .card-section {
             margin-bottom: 32px;
         }
+        
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
+        
         .section-header h2 {
             font-size: 18px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .section-link {
             color: #8E8E93;
             font-size: 14px;
             font-weight: 500;
             text-decoration: none;
         }
+        
         .digital-card {
             background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
             border-radius: 24px;
@@ -272,6 +317,7 @@
             overflow: hidden;
             max-width: 500px;
         }
+        
         .card-accent {
             position: absolute;
             top: -80px;
@@ -281,6 +327,7 @@
             background: rgba(255,255,255,0.03);
             border-radius: 50%;
         }
+        
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -289,6 +336,7 @@
             position: relative;
             z-index: 1;
         }
+        
         .card-brand h3 {
             color: #FFFFFF;
             font-size: 14px;
@@ -297,11 +345,13 @@
             letter-spacing: 1px;
             margin-bottom: 4px;
         }
+        
         .card-brand p {
             color: #FFFFFF;
             font-size: 20px;
             font-weight: 500;
         }
+        
         .card-chip {
             width: 45px;
             height: 30px;
@@ -310,6 +360,7 @@
             position: relative;
             overflow: hidden;
         }
+        
         .card-chip::after {
             content: '';
             position: absolute;
@@ -320,6 +371,7 @@
             background: rgba(255,255,255,0.3);
             border-radius: 2px;
         }
+        
         .card-number {
             color: #FFFFFF;
             font-size: 24px;
@@ -330,12 +382,14 @@
             z-index: 1;
             font-family: 'Inter', monospace;
         }
+        
         .card-details {
             display: flex;
             gap: 40px;
             position: relative;
             z-index: 1;
         }
+        
         .card-holder p, .card-expiry p {
             color: #FFFFFF;
             font-size: 12px;
@@ -343,34 +397,42 @@
             margin-bottom: 4px;
             letter-spacing: 0.8px;
         }
+        
         .card-holder span, .card-expiry span {
             color: #FFFFFF;
             font-size: 18px;
             font-weight: 500;
         }
+        
+        /* Main Grid Layout */
         .main-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
             gap: 24px;
             margin-bottom: 32px;
         }
+        
+        /* Active Loan Card */
         .loan-card {
             background: #FFFFFF;
             border: 1px solid #F0F0F3;
             border-radius: 24px;
             padding: 28px;
         }
+        
         .loan-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
+        
         .loan-header h3 {
             font-size: 18px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .loan-badge {
             background: #F8F8FA;
             padding: 6px 14px;
@@ -380,20 +442,24 @@
             color: #1E1E1E;
             border: 1px solid #F0F0F3;
         }
+        
         .loan-balance {
             margin-bottom: 24px;
         }
+        
         .loan-balance-label {
             font-size: 13px;
             color: #8E8E93;
             margin-bottom: 4px;
         }
+        
         .loan-balance-amount {
             font-size: 42px;
             font-weight: 600;
             color: #1E1E1E;
             letter-spacing: -1px;
         }
+        
         .loan-breakdown {
             display: flex;
             gap: 32px;
@@ -401,41 +467,50 @@
             padding-bottom: 24px;
             border-bottom: 1px solid #F5F5F7;
         }
+        
         .breakdown-item {
             flex: 1;
         }
+        
         .breakdown-label {
             font-size: 13px;
             color: #8E8E93;
             margin-bottom: 4px;
         }
+        
         .breakdown-value {
             font-size: 18px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .payment-section {
             background: #F8F8FA;
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 24px;
         }
+        
         .payment-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 16px;
         }
+        
         .payment-row:last-child {
             margin-bottom: 0;
         }
+        
         .payment-label {
             color: #8E8E93;
             font-size: 14px;
         }
+        
         .payment-value {
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .payment-date {
             display: flex;
             align-items: center;
@@ -443,14 +518,17 @@
             color: #FF9F0A;
             font-weight: 600;
         }
+        
         .payment-date svg {
             width: 18px;
             height: 18px;
             stroke: #FF9F0A;
         }
+        
         .loan-progress {
             margin: 20px 0;
         }
+        
         .progress-header {
             display: flex;
             justify-content: space-between;
@@ -458,22 +536,26 @@
             color: #8E8E93;
             margin-bottom: 8px;
         }
+        
         .progress-bar {
             height: 8px;
             background: #F0F0F3;
             border-radius: 4px;
             overflow: hidden;
         }
+        
         .progress-fill {
             height: 100%;
             width: 65%;
             background: #1E1E1E;
             border-radius: 4px;
         }
+        
         .loan-actions {
             display: flex;
             gap: 12px;
         }
+        
         .btn {
             flex: 1;
             padding: 16px;
@@ -485,43 +567,54 @@
             border: none;
             text-align: center;
         }
+        
         .btn-primary {
             background: #1E1E1E;
             color: #FFFFFF;
         }
+        
         .btn-primary:hover {
             background: #2C2C2E;
         }
+        
         .btn-secondary {
             background: #FFFFFF;
             color: #1E1E1E;
             border: 1px solid #F0F0F3;
         }
+        
         .btn-secondary:hover {
             background: #F8F8FA;
         }
+        
+        /* Right Column */
         .right-column {
             display: flex;
             flex-direction: column;
             gap: 24px;
         }
+        
+        /* Eligibility Card */
         .eligibility-card {
             background: #FFFFFF;
             border: 1px solid #F0F0F3;
             border-radius: 24px;
             padding: 28px;
         }
+        
         .eligibility-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
+        
         .eligibility-header h3 {
             font-size: 18px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .eligibility-badge {
             background: #E4F2E4;
             color: #34C759;
@@ -530,12 +623,14 @@
             font-size: 13px;
             font-weight: 500;
         }
+        
         .eligibility-amount {
             font-size: 36px;
             font-weight: 600;
             color: #1E1E1E;
             margin-bottom: 16px;
         }
+        
         .eligibility-detail {
             display: flex;
             gap: 24px;
@@ -543,6 +638,7 @@
             padding-bottom: 20px;
             border-bottom: 1px solid #F5F5F7;
         }
+        
         .eligibility-note {
             display: flex;
             align-items: center;
@@ -550,11 +646,13 @@
             color: #8E8E93;
             font-size: 14px;
         }
+        
         .eligibility-note svg {
             width: 18px;
             height: 18px;
             stroke: #8E8E93;
         }
+        
         .apply-btn {
             width: 100%;
             padding: 16px;
@@ -570,33 +668,40 @@
             display: inline-block;
             text-align: center;
         }
+        
+        /* Recent Activity */
         .activity-card {
             background: #FFFFFF;
             border: 1px solid #F0F0F3;
             border-radius: 24px;
             padding: 28px;
         }
+        
         .activity-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
         }
+        
         .activity-header h3 {
             font-size: 18px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
         .activity-list {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
+        
         .activity-item {
             display: flex;
             align-items: center;
             gap: 16px;
         }
+        
         .activity-icon {
             width: 48px;
             height: 48px;
@@ -606,35 +711,43 @@
             align-items: center;
             justify-content: center;
         }
+        
         .activity-icon svg {
             width: 24px;
             height: 24px;
             stroke: #1E1E1E;
         }
+        
         .activity-details {
             flex: 1;
         }
+        
         .activity-title {
             font-size: 15px;
             font-weight: 600;
             color: #1E1E1E;
             margin-bottom: 4px;
         }
+        
         .activity-subtitle {
             font-size: 13px;
             color: #8E8E93;
         }
+        
         .activity-amount {
             font-size: 16px;
             font-weight: 600;
             color: #1E1E1E;
         }
+        
+        /* Quick Actions */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-bottom: 32px;
         }
+        
         .quick-action-item {
             background: #FFFFFF;
             border: 1px solid #F0F0F3;
@@ -646,9 +759,11 @@
             text-decoration: none;
             color: inherit;
         }
+        
         .quick-action-item:hover {
             background: #F8F8FA;
         }
+        
         .quick-action-icon {
             width: 48px;
             height: 48px;
@@ -659,221 +774,628 @@
             justify-content: center;
             margin: 0 auto 12px;
         }
+        
         .quick-action-icon svg {
             width: 24px;
             height: 24px;
             stroke: #1E1E1E;
         }
+        
         .quick-action-item p {
             font-size: 14px;
             font-weight: 500;
             color: #1E1E1E;
         }
-        .fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
+        
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @media (max-width: 768px) {
-            .web-container { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; position: static; padding: 20px 16px; border-right: none; border-bottom: 1px solid #F0F0F3; }
-            .sidebar-logo { margin-bottom: 20px; }
-            .nav-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-            .nav-item { padding: 10px 12px; font-size: 14px; }
-            .nav-item svg { width: 20px; height: 20px; }
-            .user-section { margin-top: 0; padding-top: 16px; }
-            .user-avatar { width: 40px; height: 40px; }
-            .user-name { font-size: 14px; }
-            .user-email { font-size: 12px; }
-            .main-content { margin-left: 0; padding: 24px 16px; }
-            .header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-            .header-left h1 { font-size: 24px; }
-            .header-left p { font-size: 14px; }
-            .header-right { width: 100%; flex-wrap: wrap; gap: 12px; }
-            .search-box { width: 100%; padding: 8px 16px; }
-            .notification-btn { width: 44px; height: 44px; position: absolute; top: 20px; right: 16px; }
-            .stats-grid { grid-template-columns: 1fr; gap: 16px; }
-            .stat-card { padding: 20px; }
-            .stat-icon { width: 48px; height: 48px; }
-            .stat-icon svg { width: 24px; height: 24px; }
-            .stat-content p { font-size: 24px; }
-            .digital-card { padding: 24px; max-width: 100%; }
-            .card-number { font-size: 20px; letter-spacing: 2px; }
-            .card-details { gap: 24px; }
-            .card-holder span, .card-expiry span { font-size: 16px; }
-            .main-grid { grid-template-columns: 1fr; gap: 20px; }
-            .loan-card, .eligibility-card, .activity-card { padding: 20px; }
-            .loan-balance-amount { font-size: 32px; }
-            .loan-breakdown { flex-direction: column; gap: 12px; }
-            .payment-row { flex-wrap: wrap; gap: 8px; }
-            .payment-date { width: 100%; justify-content: flex-end; }
-            .loan-actions { flex-direction: column; gap: 8px; }
-            .btn { padding: 14px; font-size: 14px; }
-            .eligibility-amount { font-size: 30px; }
-            .eligibility-detail { flex-wrap: wrap; gap: 16px; }
-            .activity-item { flex-wrap: wrap; gap: 12px; }
-            .activity-icon { width: 40px; height: 40px; }
-            .activity-details { min-width: 150px; }
-            .quick-actions { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .quick-action-item { padding: 16px; }
-            .quick-action-icon { width: 40px; height: 40px; }
-            .quick-action-icon svg { width: 20px; height: 20px; }
-            .quick-action-item p { font-size: 13px; }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
         }
+
+        /* ---------- MOBILE RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .web-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 20px 16px;
+                border-right: none;
+                border-bottom: 1px solid #F0F0F3;
+            }
+
+            .sidebar-logo {
+                margin-bottom: 20px;
+            }
+
+            .nav-menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .nav-item svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .user-section {
+                margin-top: 0;
+                padding-top: 16px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .user-name {
+                font-size: 14px;
+            }
+
+            .user-email {
+                font-size: 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 24px 16px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .header-left h1 {
+                font-size: 24px;
+            }
+
+            .header-left p {
+                font-size: 14px;
+            }
+
+            .header-right {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .search-box {
+                width: 100%;
+                padding: 8px 16px;
+            }
+
+            .notification-btn {
+                width: 44px;
+                height: 44px;
+                position: absolute;
+                top: 20px;
+                right: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .stat-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .stat-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .stat-content p {
+                font-size: 24px;
+            }
+
+            .digital-card {
+                padding: 24px;
+                max-width: 100%;
+            }
+
+            .card-number {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .card-details {
+                gap: 24px;
+            }
+
+            .card-holder span, .card-expiry span {
+                font-size: 16px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .loan-card, .eligibility-card, .activity-card {
+                padding: 20px;
+            }
+
+            .loan-balance-amount {
+                font-size: 32px;
+            }
+
+            .loan-breakdown {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .payment-row {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .payment-date {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .loan-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 14px;
+                font-size: 14px;
+            }
+
+            .eligibility-amount {
+                font-size: 30px;
+            }
+
+            .eligibility-detail {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .activity-item {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .activity-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .activity-details {
+                min-width: 150px;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .quick-action-item {
+                padding: 16px;
+            }
+
+            .quick-action-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .quick-action-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .quick-action-item p {
+                font-size: 13px;
+            }
+        }
+
         @media (max-width: 480px) {
-            .nav-menu { grid-template-columns: 1fr; }
-            .card-number { font-size: 18px; letter-spacing: 1px; }
-            .card-details { flex-direction: column; gap: 12px; }
-            .eligibility-detail { flex-direction: column; gap: 8px; }
-            .activity-item { flex-direction: column; align-items: flex-start; }
-            .activity-amount { align-self: flex-end; }
+            .nav-menu {
+                grid-template-columns: 1fr; /* stack nav on very small */
+            }
+
+            .card-number {
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+
+            .card-details {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .eligibility-detail {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .activity-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .activity-amount {
+                align-self: flex-end;
+            }
         }
     </style>
 </head>
 <body>
     <div class="web-container">
+        <!-- Sidebar -->
         <div class="sidebar fade-in">
             <div class="sidebar-logo">
-                <div class="logo-mark"><span>JMR</span></div>
+                <div class="logo-mark">
+                    <span>JMR</span>
+                </div>
                 <span class="logo-text">JMR Capital</span>
             </div>
+            
             <div class="nav-menu">
                 <a href="dashboard.html" class="nav-item active">
-                    <svg viewBox="0 0 24 24"><path d="M3 10L12 3L21 10V20C21 20.5 20.6 21 20 21H16C15.4 21 15 20.5 15 20V15H9V20C9 20.5 8.6 21 8 21H4C3.4 21 3 20.5 3 20V10Z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 10L12 3L21 10V20C21 20.5 20.6 21 20 21H16C15.4 21 15 20.5 15 20V15H9V20C9 20.5 8.6 21 8 21H4C3.4 21 3 20.5 3 20V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     Dashboard
                 </a>
                 <a href="loans.html" class="nav-item">
-                    <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     Loans
                 </a>
                 <a href="documents.html" class="nav-item">
-                    <svg viewBox="0 0 24 24"><path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"/><path d="M22 6L12 13L2 6"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     Documents
                 </a>
                 <a href="profile.html" class="nav-item">
-                    <svg viewBox="0 0 24 24"><path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21"/><circle cx="12" cy="7" r="4"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     Profile
                 </a>
             </div>
+            
             <div class="user-section">
-                <div class="user-avatar"><span id="userInitials">JD</span></div>
+                <div class="user-avatar">
+                    <span>JD</span>
+                </div>
                 <div class="user-info">
-                    <div class="user-name" id="userName">John Doe</div>
-                    <div class="user-email" id="userEmail">john.doe@example.com</div>
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john.doe@example.com</div>
                 </div>
             </div>
         </div>
         
+        <!-- Main Content -->
         <div class="main-content">
+            <!-- Header -->
             <div class="header fade-in">
                 <div class="header-left">
-                    <h1 id="welcomeMessage">Welcome back, John</h1>
+                    <h1>Welcome back, John</h1>
                     <p>Here's your financial overview</p>
                 </div>
                 <div class="header-right">
                     <div class="search-box">
-                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21L17 17"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M21 21L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
                         <input type="text" placeholder="Search...">
                     </div>
                     <a href="notifications.html" class="notification-btn">
-                        <svg viewBox="0 0 24 24"><path d="M18 8C18 6.4 17.4 4.9 16.2 3.7C15 2.5 13.5 2 12 2C10.5 2 9 2.5 7.8 3.7C6.6 4.9 6 6.4 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z"/><path d="M13.7 20C13.5 20.3 13.3 20.5 12.9 20.7C12.6 20.9 12.3 21 12 21C11.7 21 11.4 20.9 11.1 20.7C10.8 20.5 10.5 20.3 10.3 20"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 8C18 6.4 17.4 4.9 16.2 3.7C15 2.5 13.5 2 12 2C10.5 2 9 2.5 7.8 3.7C6.6 4.9 6 6.4 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M13.7 20C13.5 20.3 13.3 20.5 12.9 20.7C12.6 20.9 12.3 21 12 21C11.7 21 11.4 20.9 11.1 20.7C10.8 20.5 10.5 20.3 10.3 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
                     </a>
                 </div>
             </div>
             
-            <!-- Stats Grid (static for now) -->
+            <!-- Stats Grid -->
             <div class="stats-grid fade-in">
-                <div class="stat-card"><div class="stat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6"/></svg></div><div class="stat-content"><h3>Active loan</h3><p>R 2,100</p></div></div>
-                <div class="stat-card"><div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/></svg></div><div class="stat-content"><h3>Available</h3><p>R 3,000</p></div></div>
-                <div class="stat-card"><div class="stat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6V12L16 14"/></svg></div><div class="stat-content"><h3>Next payment</h3><p>3 Apr 2026</p></div></div>
-            </div>
-            
-            <!-- Digital Card (static) -->
-            <div class="card-section fade-in">
-                <div class="section-header"><h2>Your digital card</h2><a href="#" class="section-link">View details →</a></div>
-                <div class="digital-card"><div class="card-accent"></div><div class="card-header"><div class="card-brand"><h3>JMR Capital</h3><p>Premium</p></div><div class="card-chip"></div></div><div class="card-number">•••• •••• •••• 4582</div><div class="card-details"><div class="card-holder"><p>Card holder</p><span id="cardHolderName">John Doe</span></div><div class="card-expiry"><p>Expires</p><span>09/28</span></div></div></div>
-            </div>
-            
-            <div class="main-grid fade-in">
-                <!-- Left Column - Active Loan (static) -->
-                <div class="loan-card">
-                    <div class="loan-header"><h3>Active loan</h3><span class="loan-badge">Current</span></div>
-                    <div class="loan-balance"><div class="loan-balance-label">Outstanding balance</div><div class="loan-balance-amount">R 2,100</div></div>
-                    <div class="loan-breakdown"><div class="breakdown-item"><div class="breakdown-label">Principal</div><div class="breakdown-value">R 2,000</div></div><div class="breakdown-item"><div class="breakdown-label">Interest (5%)</div><div class="breakdown-value">R 100</div></div></div>
-                    <div class="payment-section"><div class="payment-row"><span class="payment-label">Monthly payment</span><span class="payment-value">R 525</span></div><div class="payment-row"><span class="payment-label">Term remaining</span><span class="payment-value">3 months</span></div><div class="payment-row"><span class="payment-label">Next payment</span><div class="payment-date"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10H21"/><path d="M8 2V6"/><path d="M16 2V6"/></svg><span>3 April 2026</span></div></div><div class="loan-progress"><div class="progress-header"><span>Repayment progress</span><span>65%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div></div></div>
-                    <div class="loan-actions"><button class="btn btn-primary">Make payment</button><button class="btn btn-secondary">View details</button></div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Active loan</h3>
+                        <p>R 2,100</p>
+                    </div>
                 </div>
                 
-                <div class="right-column">
-                    <div class="eligibility-card"><div class="eligibility-header"><h3>Loan eligibility</h3><span class="eligibility-badge">Eligible</span></div><div class="eligibility-amount">R 3,000</div><div class="eligibility-detail"><div><div style="font-size:13px;color:#8E8E93;">Min amount</div><div style="font-size:18px;font-weight:600;">R 500</div></div><div><div style="font-size:13px;color:#8E8E93;">Interest</div><div style="font-size:18px;font-weight:600;">5%</div></div><div><div style="font-size:13px;color:#8E8E93;">Term</div><div style="font-size:18px;font-weight:600;">30 days</div></div></div><div class="eligibility-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8V12M12 16H12.01"/></svg><span>All documents verified · You can apply now</span></div><a href="loans.html#apply" class="apply-btn">Apply for new loan</a></div>
-                    <div class="activity-card"><div class="activity-header"><h3>Recent activity</h3><a href="#" class="section-link">View all</a></div><div class="activity-list"><div class="activity-item"><div class="activity-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M8 12H16"/></svg></div><div class="activity-details"><div class="activity-title">Loan disbursed</div><div class="activity-subtitle">1 March 2026</div></div><div class="activity-amount">R 2,000</div></div><div class="activity-item"><div class="activity-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17L4 12"/></svg></div><div class="activity-details"><div class="activity-title">Payment received</div><div class="activity-subtitle">15 February 2026</div></div><div class="activity-amount">R 500</div></div><div class="activity-item"><div class="activity-icon"><svg viewBox="0 0 24 24"><path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21"/><circle cx="12" cy="7" r="4"/></svg></div><div class="activity-details"><div class="activity-title">Application approved</div><div class="activity-subtitle">28 February 2026</div></div><div class="activity-amount">✓</div></div></div></div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Available</h3>
+                        <p>R 3,000</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Next payment</h3>
+                        <p>3 Apr 2026</p>
+                    </div>
                 </div>
             </div>
             
+            <!-- Digital Card -->
+            <div class="card-section fade-in">
+                <div class="section-header">
+                    <h2>Your digital card</h2>
+                    <a href="#" class="section-link">View details →</a>
+                </div>
+                <div class="digital-card">
+                    <div class="card-accent"></div>
+                    <div class="card-header">
+                        <div class="card-brand">
+                            <h3>JMR Capital</h3>
+                            <p>Premium</p>
+                        </div>
+                        <div class="card-chip"></div>
+                    </div>
+                    <div class="card-number">•••• •••• •••• 4582</div>
+                    <div class="card-details">
+                        <div class="card-holder">
+                            <p>Card holder</p>
+                            <span>John Doe</span>
+                        </div>
+                        <div class="card-expiry">
+                            <p>Expires</p>
+                            <span>09/28</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Grid -->
+            <div class="main-grid fade-in">
+                <!-- Left Column - Active Loan -->
+                <div class="loan-card">
+                    <div class="loan-header">
+                        <h3>Active loan</h3>
+                        <span class="loan-badge">Current</span>
+                    </div>
+                    
+                    <div class="loan-balance">
+                        <div class="loan-balance-label">Outstanding balance</div>
+                        <div class="loan-balance-amount">R 2,100</div>
+                    </div>
+                    
+                    <div class="loan-breakdown">
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Principal</div>
+                            <div class="breakdown-value">R 2,000</div>
+                        </div>
+                        <div class="breakdown-item">
+                            <div class="breakdown-label">Interest (5%)</div>
+                            <div class="breakdown-value">R 100</div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-section">
+                        <div class="payment-row">
+                            <span class="payment-label">Monthly payment</span>
+                            <span class="payment-value">R 525</span>
+                        </div>
+                        <div class="payment-row">
+                            <span class="payment-label">Term remaining</span>
+                            <span class="payment-value">3 months</span>
+                        </div>
+                        <div class="payment-row">
+                            <span class="payment-label">Next payment</span>
+                            <div class="payment-date">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    <path d="M3 10H21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M8 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M16 2V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                                <span>3 April 2026</span>
+                            </div>
+                        </div>
+                        
+                        <div class="loan-progress">
+                            <div class="progress-header">
+                                <span>Repayment progress</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="loan-actions">
+                        <button class="btn btn-primary">Make payment</button>
+                        <button class="btn btn-secondary">View details</button>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="right-column">
+                    <!-- Eligibility Card -->
+                    <div class="eligibility-card">
+                        <div class="eligibility-header">
+                            <h3>Loan eligibility</h3>
+                            <span class="eligibility-badge">Eligible</span>
+                        </div>
+                        
+                        <div class="eligibility-amount">R 3,000</div>
+                        
+                        <div class="eligibility-detail">
+                            <div>
+                                <div style="font-size: 13px; color: #8E8E93;">Min amount</div>
+                                <div style="font-size: 18px; font-weight: 600;">R 500</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 13px; color: #8E8E93;">Interest</div>
+                                <div style="font-size: 18px; font-weight: 600;">5%</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 13px; color: #8E8E93;">Term</div>
+                                <div style="font-size: 18px; font-weight: 600;">30 days</div>
+                            </div>
+                        </div>
+                        
+                        <div class="eligibility-note">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                <path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span>All documents verified · You can apply now</span>
+                        </div>
+                        
+                        <a href="loans.html#apply" class="apply-btn">Apply for new loan</a>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <h3>Recent activity</h3>
+                            <a href="#" class="section-link">View all</a>
+                        </div>
+                        
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                        <path d="M8 12H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-title">Loan disbursed</div>
+                                    <div class="activity-subtitle">1 March 2026</div>
+                                </div>
+                                <div class="activity-amount">R 2,000</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-title">Payment received</div>
+                                    <div class="activity-subtitle">15 February 2026</div>
+                                </div>
+                                <div class="activity-amount">R 500</div>
+                            </div>
+                            
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                                    </svg>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-title">Application approved</div>
+                                    <div class="activity-subtitle">28 February 2026</div>
+                                </div>
+                                <div class="activity-amount">✓</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
             <div class="quick-actions fade-in">
-                <a href="documents.html" class="quick-action-item"><div class="quick-action-icon"><svg viewBox="0 0 24 24"><path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"/><path d="M22 6L12 13L2 6"/></svg></div><p>Upload document</p></a>
-                <a href="loans.html#apply" class="quick-action-item"><div class="quick-action-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6"/></svg></div><p>Apply for loan</p></a>
-                <a href="profile.html" class="quick-action-item"><div class="quick-action-icon"><svg viewBox="0 0 24 24"><path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21"/><circle cx="12" cy="7" r="4"/></svg></div><p>Update profile</p></a>
-                <a href="settings.html" class="quick-action-item"><div class="quick-action-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15C18.9 16 18.1 16.8 17.2 17.2L19 20.6"/><path d="M5 20.6L6.8 17.2C5.9 16.8 5.1 16 4.6 15L2 15"/><path d="M2 9H4.6C5.1 8 5.9 7.2 6.8 6.8L5 3.4"/><path d="M19 3.4L17.2 6.8C18.1 7.2 18.9 8 19.4 9H22"/></svg></div><p>Settings</p></a>
+                <a href="documents.html" class="quick-action-item">
+                    <div class="quick-action-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p>Upload document</p>
+                </a>
+                
+                <a href="loans.html#apply" class="quick-action-item">
+                    <div class="quick-action-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p>Apply for loan</p>
+                </a>
+                
+                <a href="profile.html" class="quick-action-item">
+                    <div class="quick-action-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 21V19C20 16.8 18.2 15 16 15H8C5.8 15 4 16.8 4 19V21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p>Update profile</p>
+                </a>
+                
+                <a href="settings.html" class="quick-action-item">
+                    <div class="quick-action-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.4 15C18.9 16 18.1 16.8 17.2 17.2L19 20.6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 20.6L6.8 17.2C5.9 16.8 5.1 16 4.6 15L2 15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 9H4.6C5.1 8 5.9 7.2 6.8 6.8L5 3.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19 3.4L17.2 6.8C18.1 7.2 18.9 8 19.4 9H22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p>Settings</p>
+                </a>
             </div>
         </div>
     </div>
-
-    <script>
-        const API_BASE = document.querySelector('meta[name="api-base"]').getAttribute('content');
-
-        // Check authentication
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = 'auth.html';
-        }
-
-        // Logout function
-        window.logout = function() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('user');
-            window.location.href = 'index.html';
-        };
-
-        // Fetch profile and update UI
-        async function loadDashboard() {
-            try {
-                const res = await fetch(`${API_BASE}/profile`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (res.status === 401) {
-                    localStorage.removeItem('token');
-                    window.location.href = 'auth.html';
-                    return;
-                }
-                const profile = await res.json();
-                const firstName = profile.personalInfo?.firstName || '';
-                const lastName = profile.personalInfo?.lastName || '';
-                const fullName = `${firstName} ${lastName}`.trim() || 'User';
-                const email = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).email : '';
-
-                document.getElementById('userName').textContent = fullName;
-                document.getElementById('userEmail').textContent = email;
-                document.getElementById('welcomeMessage').textContent = `Welcome back, ${firstName || 'User'}`;
-                document.getElementById('userInitials').textContent = (firstName[0] || '') + (lastName[0] || '');
-                document.getElementById('cardHolderName').textContent = fullName;
-            } catch (err) {
-                console.error('Error loading profile:', err);
-            }
-        }
-
-        loadDashboard();
-
-        // Add logout button to sidebar user-section
-        const userSection = document.querySelector('.user-section');
-        const logoutBtn = document.createElement('button');
-        logoutBtn.textContent = 'Sign out';
-        logoutBtn.style.cssText = 'background:none; border:none; color:#FF3B30; cursor:pointer; font-size:13px; margin-left:8px;';
-        logoutBtn.onclick = logout;
-        userSection.appendChild(logoutBtn);
-    </script>
 </body>
 </html>
