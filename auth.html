@@ -2,175 +2,812 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="api-base" content="https://jmrcapital-func-bxbvbvhsgha3eubj.southafricanorth-01.azurewebsites.net/api">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>JMR Capital · Sign in</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; max-width: 400px; margin: 2rem auto; padding: 1rem; }
-        form { display: flex; flex-direction: column; gap: 1rem; }
-        input, button { padding: 0.5rem; }
-        .toggle { display: flex; gap: 1rem; margin-bottom: 1rem; }
-        .toggle button { flex: 1; }
-        .login-view, .register-view { display: none; }
-        .active { display: block; }
-        .error { color: red; margin-top: 1rem; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8F8FA;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+        
+        .auth-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            min-height: 700px;
+            background: #FFFFFF;
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .brand-panel {
+            flex: 1;
+            background: #1E1E1E;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        
+        .brand-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-mark span {
+            color: #1E1E1E;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .logo-text {
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .brand-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brand-title {
+            color: #FFFFFF;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        
+        .brand-subtitle {
+            color: rgba(255,255,255,0.6);
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 400px;
+            margin-bottom: 48px;
+        }
+        
+        .brand-features {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #FFFFFF;
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #FFFFFF;
+            stroke-width: 1.8;
+            fill: none;
+        }
+        
+        .feature-text h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .feature-text p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .brand-footer {
+            position: relative;
+            z-index: 1;
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            margin-top: 60px;
+        }
+        
+        .auth-panel {
+            flex: 1;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            background: #FFFFFF;
+        }
+        
+        .auth-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 60px;
+        }
+        
+        .auth-toggle {
+            display: flex;
+            gap: 8px;
+            background: #F8F8FA;
+            padding: 4px;
+            border-radius: 40px;
+            border: 1px solid #F0F0F3;
+        }
+        
+        .toggle-btn {
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #8E8E93;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .toggle-btn.active {
+            background: #FFFFFF;
+            color: #1E1E1E;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        
+        .auth-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .auth-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1E1E1E;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .auth-subtitle {
+            font-size: 16px;
+            color: #8E8E93;
+            margin-bottom: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #8E8E93;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .form-input {
+            width: 100%;
+            background: #F8F8FA;
+            border: 1px solid #F0F0F3;
+            border-radius: 16px;
+            padding: 16px 18px;
+            font-size: 16px;
+            color: #1E1E1E;
+            outline: none;
+            transition: all 0.2s ease;
+            -webkit-appearance: none;
+        }
+        
+        .form-input:focus {
+            border-color: #1E1E1E;
+            background: #FFFFFF;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .options-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 0 32px 0;
+        }
+        
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox input {
+            width: 18px;
+            height: 18px;
+            border-radius: 6px;
+            border: 2px solid #E5E5EA;
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .checkbox input:checked {
+            background: #1E1E1E;
+            border-color: #1E1E1E;
+        }
+        
+        .checkbox input:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .checkbox span {
+            font-size: 15px;
+            color: #1E1E1E;
+        }
+        
+        .forgot-link {
+            background: none;
+            border: none;
+            font-size: 15px;
+            color: #8E8E93;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .forgot-link:hover {
+            color: #1E1E1E;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 18px 0;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            margin-bottom: 24px;
+        }
+        
+        .auth-btn.primary {
+            background: #1E1E1E;
+            color: #FFFFFF;
+        }
+        
+        .auth-btn.primary:hover {
+            background: #2C2C2E;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: #C6C6C8;
+            font-size: 13px;
+        }
+        
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #F0F0F3;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 16px 0;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid #F0F0F3;
+            background: #FFFFFF;
+            color: #1E1E1E;
+        }
+        
+        .social-btn:hover {
+            background: #F8F8FA;
+        }
+        
+        .social-btn.apple {
+            background: #000000;
+            color: #FFFFFF;
+            border: none;
+        }
+        
+        .social-btn.apple:hover {
+            background: #1C1C1E;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            color: #8E8E93;
+            font-size: 14px;
+        }
+        
+        .auth-footer button,
+        .auth-footer label {
+            background: none;
+            border: none;
+            color: #1E1E1E;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 4px;
+            text-decoration: underline;
+            display: inline;
+        }
+        
+        .view-toggle {
+            display: none;
+        }
+        
+        #login-view:checked ~ .auth-container .login-view {
+            display: block;
+        }
+        
+        #login-view:checked ~ .auth-container .register-view {
+            display: none;
+        }
+        
+        #register-view:checked ~ .auth-container .login-view {
+            display: none;
+        }
+        
+        #register-view:checked ~ .auth-container .register-view {
+            display: block;
+        }
+        
+        #login-view:checked ~ .auth-container .toggle-login {
+            background: #FFFFFF;
+            color: #1E1E1E;
+        }
+        
+        #register-view:checked ~ .auth-container .toggle-register {
+            background: #FFFFFF;
+            color: #1E1E1E;
+        }
+
+        /* ---------- MOBILE RESPONSIVE FIXES ---------- */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+                align-items: flex-start;
+            }
+
+            .auth-container {
+                flex-direction: column;
+                border-radius: 32px;
+                min-height: auto;
+                margin: 0;
+            }
+
+            .brand-panel {
+                padding: 32px 24px;
+                border-radius: 32px 32px 0 0;
+            }
+
+            .brand-panel::before,
+            .brand-panel::after {
+                content: none; /* remove decorative circles on mobile for cleaner look */
+            }
+
+            .brand-logo {
+                margin-bottom: 32px;
+            }
+
+            .brand-title {
+                font-size: 36px;
+                letter-spacing: -0.5px;
+            }
+
+            .brand-subtitle {
+                font-size: 16px;
+                margin-bottom: 32px;
+            }
+
+            .brand-features {
+                gap: 16px;
+            }
+
+            .feature-item {
+                gap: 12px;
+            }
+
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .feature-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .feature-text h4 {
+                font-size: 15px;
+            }
+
+            .feature-text p {
+                font-size: 13px;
+            }
+
+            .brand-footer {
+                margin-top: 32px;
+                font-size: 13px;
+            }
+
+            .auth-panel {
+                padding: 40px 24px;
+            }
+
+            .auth-header {
+                margin-bottom: 32px;
+                justify-content: center;
+            }
+
+            .auth-toggle {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .toggle-btn {
+                flex: 1;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .auth-title {
+                font-size: 28px;
+            }
+
+            .auth-subtitle {
+                font-size: 15px;
+                margin-bottom: 32px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+                margin-bottom: 0;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 24px;
+            }
+
+            .form-input {
+                padding: 14px 16px;
+                font-size: 16px; /* prevents zoom on iOS */
+            }
+
+            .options-row {
+                margin: 8px 0 24px 0;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .checkbox span {
+                font-size: 14px;
+            }
+
+            .forgot-link {
+                font-size: 14px;
+            }
+
+            .auth-btn {
+                padding: 16px 0;
+                font-size: 16px;
+            }
+
+            .social-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .social-btn {
+                padding: 14px 0;
+                font-size: 14px;
+            }
+
+            .divider {
+                margin: 20px 0;
+                gap: 12px;
+            }
+
+            .auth-footer {
+                font-size: 14px;
+            }
+        }
+
+        /* small phones */
+        @media (max-width: 480px) {
+            .brand-title {
+                font-size: 32px;
+            }
+
+            .brand-panel {
+                padding: 24px 20px;
+            }
+
+            .auth-panel {
+                padding: 32px 20px;
+            }
+
+            .auth-toggle {
+                max-width: 100%;
+            }
+
+            .toggle-btn {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .feature-item {
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="toggle">
-        <button id="showLogin">Sign in</button>
-        <button id="showRegister">Create account</button>
+    <input type="radio" name="view" id="login-view" class="view-toggle" checked>
+    <input type="radio" name="view" id="register-view" class="view-toggle">
+    
+    <div class="auth-container">
+        <div class="brand-panel">
+            <div class="brand-logo">
+                <div class="logo-mark"><span>JMR</span></div>
+                <span class="logo-text">JMR Capital</span>
+            </div>
+            <div class="brand-content">
+                <h1 class="brand-title">Private lending,<br>simplified</h1>
+                <p class="brand-subtitle">Access funds quickly with our streamlined application process and competitive rates.</p>
+                <div class="brand-features">
+                    <div class="feature-item">
+                        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/></svg></div>
+                        <div class="feature-text"><h4>Fast approval</h4><p>Decisions in minutes, not days</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M8 6V4C8 2.9 8.9 2 10 2H14C15.1 2 16 2.9 16 4V6"/></svg></div>
+                        <div class="feature-text"><h4>Flexible amounts</h4><p>From R500 to R3,000</p></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6V12L16 14"/></svg></div>
+                        <div class="feature-text"><h4>Transparent terms</h4><p>5% fixed interest, no hidden fees</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-footer">© 2026 JMR Capital · NCRCP12345</div>
+        </div>
+        
+        <div class="auth-panel">
+            <div class="auth-header">
+                <div class="auth-toggle">
+                    <label for="login-view" class="toggle-btn toggle-login">Sign in</label>
+                    <label for="register-view" class="toggle-btn toggle-register">Create account</label>
+                </div>
+            </div>
+            
+            <div class="auth-content">
+                <!-- Login View -->
+                <div class="login-view">
+                    <h2 class="auth-title">Welcome back</h2>
+                    <p class="auth-subtitle">Sign in to your account</p>
+                    
+                    <form action="dashboard.html">
+                        <div class="form-group">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-input" placeholder="john.doe@example.com" value="john.doe@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" placeholder="Enter your password" value="password123">
+                        </div>
+                        
+                        <div class="options-row">
+                            <label class="checkbox">
+                                <input type="checkbox" checked>
+                                <span>Remember me</span>
+                            </label>
+                            <button class="forgot-link">Forgot password?</button>
+                        </div>
+                        
+                        <button type="submit" class="auth-btn primary">Sign in</button>
+                        
+                        <div class="divider">
+                            <span class="divider-line"></span>
+                            <span>or continue with</span>
+                            <span class="divider-line"></span>
+                        </div>
+                        
+                        <div class="social-buttons">
+                            <button class="social-btn apple">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z" fill="currentColor"/></svg>
+                                Apple
+                            </button>
+                            <button class="social-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H18.02C17.74 15.53 17.02 16.63 15.97 17.36V20.09H19.38C21.32 18.31 22.56 15.6 22.56 12.25Z" fill="#4285F4"/><path d="M12 23C14.83 23 17.21 22.02 19.38 20.09L15.97 17.36C14.8 18.12 13.45 18.57 12 18.57C9.27 18.57 6.97 16.77 6.16 14.31H2.64V17.13C4.8 21.38 9.14 23 12 23Z" fill="#34A853"/><path d="M6.16 14.31C5.95 13.69 5.84 13.03 5.84 12.35C5.84 11.67 5.95 11.01 6.16 10.39V7.57H2.64C1.94 8.95 1.5 10.5 1.5 12.18C1.5 13.86 1.94 15.41 2.64 16.79L6.16 14.31Z" fill="#FBBC05"/><path d="M12 6.43C13.58 6.43 14.99 7.01 16.1 8.07L19.46 4.71C17.2 2.6 14.22 1.5 12 1.5C8.14 1.5 4.8 4.12 2.64 7.57L6.16 10.39C6.97 7.93 9.27 6.43 12 6.43Z" fill="#EA4335"/></svg>
+                                Google
+                            </button>
+                        </div>
+                        
+                        <div class="auth-footer">
+                            Don't have an account?
+                            <label for="register-view">Create one</label>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Register View -->
+                <div class="register-view">
+                    <h2 class="auth-title">Create account</h2>
+                    <p class="auth-subtitle">Get started with JMR Capital</p>
+                    
+                    <form action="dashboard.html">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First name</label>
+                                <input type="text" class="form-input" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last name</label>
+                                <input type="text" class="form-input" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-input" placeholder="john.doe@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">ID Number</label>
+                            <input type="text" class="form-input" placeholder="800101 5009 087">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" placeholder="Create password">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm</label>
+                                <input type="password" class="form-input" placeholder="Confirm password">
+                            </div>
+                        </div>
+                        
+                        <div class="options-row">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                <span>I accept the <a href="#" style="color: #1E1E1E; font-weight: 600; text-decoration: underline;">terms</a></span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="auth-btn primary">Create account</button>
+                        
+                        <div class="divider">
+                            <span class="divider-line"></span>
+                            <span>or continue with</span>
+                            <span class="divider-line"></span>
+                        </div>
+                        
+                        <div class="social-buttons">
+                            <button class="social-btn apple">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.879V14.89H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.879C18.343 21.129 22 16.99 22 12C22 6.477 17.523 2 12 2Z" fill="currentColor"/></svg>
+                                Apple
+                            </button>
+                            <button class="social-btn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H18.02C17.74 15.53 17.02 16.63 15.97 17.36V20.09H19.38C21.32 18.31 22.56 15.6 22.56 12.25Z" fill="#4285F4"/><path d="M12 23C14.83 23 17.21 22.02 19.38 20.09L15.97 17.36C14.8 18.12 13.45 18.57 12 18.57C9.27 18.57 6.97 16.77 6.16 14.31H2.64V17.13C4.8 21.38 9.14 23 12 23Z" fill="#34A853"/><path d="M6.16 14.31C5.95 13.69 5.84 13.03 5.84 12.35C5.84 11.67 5.95 11.01 6.16 10.39V7.57H2.64C1.94 8.95 1.5 10.5 1.5 12.18C1.5 13.86 1.94 15.41 2.64 16.79L6.16 14.31Z" fill="#FBBC05"/><path d="M12 6.43C13.58 6.43 14.99 7.01 16.1 8.07L19.46 4.71C17.2 2.6 14.22 1.5 12 1.5C8.14 1.5 4.8 4.12 2.64 7.57L6.16 10.39C6.97 7.93 9.27 6.43 12 6.43Z" fill="#EA4335"/></svg>
+                                Google
+                            </button>
+                        </div>
+                        
+                        <div class="auth-footer">
+                            Already have an account?
+                            <label for="login-view">Sign in</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Login Form -->
-    <div id="loginView" class="login-view active">
-        <form id="loginForm">
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button type="submit">Sign in</button>
-        </form>
-    </div>
-
-    <!-- Register Form -->
-    <div id="registerView" class="register-view">
-        <form id="registerForm">
-            <input type="text" id="firstName" placeholder="First name" required>
-            <input type="text" id="lastName" placeholder="Last name" required>
-            <input type="email" id="regEmail" placeholder="Email" required>
-            <input type="password" id="regPassword" placeholder="Password" required>
-            <input type="password" id="confirmPassword" placeholder="Confirm password" required>
-            <button type="submit">Create account</button>
-        </form>
-    </div>
-
-    <div id="message" class="error"></div>
-
-    <script>
-        const API_BASE = document.querySelector('meta[name="api-base"]').getAttribute('content');
-
-        // Toggle views
-        const loginView = document.getElementById('loginView');
-        const registerView = document.getElementById('registerView');
-        document.getElementById('showLogin').onclick = () => {
-            loginView.classList.add('active');
-            registerView.classList.remove('active');
-        };
-        document.getElementById('showRegister').onclick = () => {
-            registerView.classList.add('active');
-            loginView.classList.remove('active');
-        };
-
-        // Helper to show messages
-        function showMessage(msg, isError = true) {
-            const msgDiv = document.getElementById('message');
-            msgDiv.textContent = msg;
-            msgDiv.style.color = isError ? 'red' : 'green';
-            setTimeout(() => msgDiv.textContent = '', 3000);
-        }
-
-        // Register form
-        const registerForm = document.getElementById('registerForm');
-        console.log('🔍 Register form found?', !!registerForm);
-
-        if (registerForm) {
-            registerForm.addEventListener('submit', async (e) => {
-                console.log('🔥 Register form submitted!');
-                e.preventDefault();
-
-                const firstName = document.getElementById('firstName').value.trim();
-                const lastName = document.getElementById('lastName').value.trim();
-                const email = document.getElementById('regEmail').value.trim();
-                const password = document.getElementById('regPassword').value;
-                const confirm = document.getElementById('confirmPassword').value;
-
-                if (password !== confirm) {
-                    showMessage('Passwords do not match');
-                    return;
-                }
-
-                const payload = { firstName, lastName, email, password, confirmPassword: confirm };
-
-                try {
-                    console.log('📤 Sending to:', `${API_BASE}/auth/register`);
-                    console.log('📦 Payload:', payload);
-                    const res = await fetch(`${API_BASE}/auth/register`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    console.log('📥 Response status:', res.status);
-                    const text = await res.text();
-                    console.log('📄 Raw response:', text);
-                    let data;
-                    try {
-                        data = JSON.parse(text);
-                    } catch {
-                        data = { error: text };
-                    }
-                    if (!res.ok) {
-                        showMessage(data.error || 'Registration failed');
-                        return;
-                    }
-                    localStorage.setItem('token', data.accessToken);
-                    localStorage.setItem('refreshToken', data.refreshToken);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    window.location.href = 'dashboard.html';
-                } catch (err) {
-                    console.error('❌ Network error:', err);
-                    showMessage('Network error: ' + err.message);
-                }
-            });
-        } else {
-            console.error('❌ Register form NOT found!');
-        }
-
-        // Login form
-        const loginForm = document.getElementById('loginForm');
-        console.log('🔍 Login form found?', !!loginForm);
-
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                console.log('🔥 Login form submitted!');
-                e.preventDefault();
-
-                const email = document.getElementById('loginEmail').value.trim();
-                const password = document.getElementById('loginPassword').value;
-
-                const payload = { email, password };
-
-                try {
-                    console.log('📤 Sending to:', `${API_BASE}/auth/login`);
-                    console.log('📦 Payload:', payload);
-                    const res = await fetch(`${API_BASE}/auth/login`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    console.log('📥 Response status:', res.status);
-                    const text = await res.text();
-                    console.log('📄 Raw response:', text);
-                    let data;
-                    try {
-                        data = JSON.parse(text);
-                    } catch {
-                        data = { error: text };
-                    }
-                    if (!res.ok) {
-                        showMessage(data.error || 'Login failed');
-                        return;
-                    }
-                    localStorage.setItem('token', data.accessToken);
-                    localStorage.setItem('refreshToken', data.refreshToken);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    window.location.href = 'dashboard.html';
-                } catch (err) {
-                    console.error('❌ Network error:', err);
-                    showMessage('Network error: ' + err.message);
-                }
-            });
-        } else {
-            console.error('❌ Login form NOT found!');
-        }
-    </script>
 </body>
 </html>
